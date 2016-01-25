@@ -1,0 +1,1338 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ballance_tools"
+        Title="Ballance工具箱" Height="700" Width="900" FontFamily="Microsoft YaHei UI Light" Icon="icon.ico" Loaded="app_init">
+    <Window.Background >
+        <ImageBrush ImageSource="background.jpg"/>
+    </Window.Background>
+
+    <Grid Background="#00000000">
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="44"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#3f000000"/>
+
+        <!-- 主界面-->
+        <TabControl x:Name="tabControl_1" TabStripPlacement="Left" Background="#00000000" BorderThickness="0" Grid.ColumnSpan="2">
+            <!-- -->
+            <TabItem Header="主页" IsSelected="true" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\home.png"/>
+                </TabItem.BorderBrush>
+
+                <Grid Background="#00000000">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 游戏地址-->
+                    <Grid Grid.Row="9" Grid.Column="1" Height="30">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Foreground="White" FontSize="15" Text="Ballance路径：" Grid.Row="1" Background="#00000000"/>
+                        <TextBox x:Name="ui_form_start_ballance_path" BorderThickness="0,0,0,1" Grid.Column="1" Foreground="White" FontSize="15" Grid.Row="1" Text="" Background="#00000000" IsReadOnly="True"/>
+
+                        <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" MouseDown="ui_form_start_search_file">
+                            <Grid.Background >
+                                <ImageBrush ImageSource="photo\search.png"/>
+                            </Grid.Background>
+
+                            <Ellipse Fill="#00000000" Stroke="White" />
+                        </Grid>
+
+                    </Grid>
+
+                    <!-- 开始游戏-->
+                    <Button x:Name="ui_form_start_play_btn" Foreground="White" Background="#8f1e90ff" FontSize="15" Content="开始游戏" Grid.Row="5" Grid.Column="1" Width="300" Height="60"/>
+
+                    <Grid Grid.Column="1" Grid.Row="1" Height="256" Width="256">
+                        <Grid.Background >
+                            <ImageBrush ImageSource="photo\logo.png"/>
+                        </Grid.Background>
+                    </Grid>
+
+                    <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="Ballance" Grid.Row="3" Background="#00000000" TextAlignment="Center"/>
+                    
+                    <!-- 新手-->
+                    <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff1e90ff" FontSize="15" TextAlignment="Center" Text="我是新手不会玩" MouseDown="ui_form_start_new_player"/>
+
+                </Grid>
+
+            </TabItem>
+
+            <!-- -->
+            <TabItem Header="关卡" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\level.png"/>
+                </TabItem.BorderBrush>
+
+                <Grid Background="#00000000">
+
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TabControl x:Name="tabControl_2" Background="#00000000" BorderThickness="0" Grid.Column="1">
+
+                        <TabItem Header="地图检测" IsSelected="true" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="5*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="1" Grid.Column="1" Height="30" Width="200" Content="立即检测" Click="ui_form_level_form_check_checking_btn"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="1" Grid.Column="3" Height="30" Width="200" Content="重置选中关卡" Click="ui_form_level_form_check_restart_btn"/>
+                                </Grid>
+
+                                <Grid x:Name="ui_form_level_form_check_list_empty" Grid.Row="3" Opacity="0">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Foreground="White" FontSize="15" Text="还没有检测各关卡地图" Grid.Row="1" TextAlignment="Center"/>
+                                </Grid>
+                                <ListBox x:Name="ui_form_level_form_check_list" Grid.Row="3" Background="#00000000" BorderThickness="0" SelectionMode="Multiple"  HorizontalContentAlignment="Stretch"/>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="地图管理" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- 地图列表-->
+                                <Grid>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock  Grid.Row="1" Foreground="White" FontSize="15" Text="搜索地图：" />
+                                        <TextBox x:Name="ui_form_level_form_level_list_form_search" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="" Background="#00000000" BorderThickness="0,0,0,1"/>
+
+                                        <Grid Grid.Column="2" Grid.RowSpan="3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <TextBlock Foreground="White" FontSize="15" Grid.Row="2" Text="右击地图列表执行更多操作" TextAlignment="center"/>
+
+                                    <Grid x:Name="ui_form_level_form_level_list_empty" Grid.Row="4" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有任何地图" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_level_form_level_list" Grid.Row="4" Background="#00000000" BorderThickness="0" HorizontalContentAlignment="Stretch">
+                                        <!-- 右键菜单-->
+                                        <ListBox.ContextMenu>
+                                            <ContextMenu >
+                                                <MenuItem Header="安装/更新 地图包" Click="ui_form_level_form_level_menu_setup_map_bag"/>
+                                                <Separator/>
+                                                <MenuItem Header="添加地图" Click="ui_form_level_form_level_menu_add_map"/>
+                                                <MenuItem Header="删除选中地图" Click="ui_form_level_form_level_menu_delete_map"/>
+                                                <Separator/>
+                                                <MenuItem Header="安装选中地图到某关卡" Click="ui_form_level_form_level_menu_setup_map"/>
+                                            </ContextMenu>
+                                        </ListBox.ContextMenu>
+
+                                    </ListBox>
+
+
+                                </Grid>
+
+                                <Grid Grid.Column="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="150"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- 地图展示-->
+                                    <Grid x:Name="ui_form_level_form_level_show" Grid.Row="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="10"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock x:Name="ui_form_level_form_level_show_title" Foreground="White" FontSize="20" Grid.Row="1" Text=""/>
+                                        <TextBlock x:Name="ui_form_level_form_level_show_text" Foreground="White" FontSize="15" Grid.Row="3" Text=""/>
+                                    </Grid>
+
+                                    <!-- 英雄榜-->
+                                    <TextBlock Foreground="White" FontSize="15" Text="英雄榜" Grid.Row="1" TextAlignment="Center"/>
+
+                                    <Grid x:Name="ui_form_level_form_hero_list_empty" Grid.Row="3" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有英雄榜记录" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_level_form_hero_list" Grid.Row="3" Background="#00000000" BorderThickness="0" HorizontalContentAlignment="Stretch"/>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+
+
+
+
+                </Grid>
+            </TabItem>
+
+            <!-- -->
+            <TabItem Header="NMO文件" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\nmo.png"/>
+                </TabItem.BorderBrush>
+                <Grid Background="#00000000">
+
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TabControl x:Name="tabControl_3" Background="#00000000" BorderThickness="0" Grid.Column="1">
+
+                        <TabItem Header="常用补丁" IsSelected="true" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Foreground="White" FontSize="15" Grid.Row="1" Text="球："/>
+                                <Grid Grid.Row="3">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock x:Name="ui_form_nmo_form_normal_ball_state" Foreground="White" FontSize="15" Grid.Row="0" Text="当前球的状态是：" TextAlignment="Center"/>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="2" Width="200" Height="30" Content="原版球速" Click="ui_form_nmo_form_normal_ball_normal"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="4" Width="200" Height="30" Content="倍速球" Click="ui_form_nmo_form_normal_ball_speed"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="6" Width="200" Height="30" Content="三高球" Click="ui_form_nmo_form_normal_high"/>
+                                </Grid>
+
+                                <TextBlock Foreground="White" FontSize="15" Grid.Row="1" Text="工具：" Grid.Column="1"/>
+                                <Grid Grid.Row="3" Grid.Column="1">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock x:Name="ui_form_nmo_form_normal_life_state" Foreground="White" FontSize="15" Grid.Row="0" Text="当前无限命的状态是：" TextAlignment="Center"/>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="2" Width="200" Height="30" Content="安装无限命" Click="ui_form_nmo_form_normal_life_add"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="4" Width="200" Height="30" Content="卸载无限命" Click="ui_form_nmo_form_normal_life_del"/>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="Mod与模型" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.ColumnSpan="3">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock x:Name="ui_form_nmo_form_mod_bml_describe" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="当前Ballance Mod Loader安装状态："/>
+
+                                    <Button x:Name="ui_form_nmo_form_mod_bml_install" Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="3" Grid.Column="3" Content="安装Ballance Mod Loader" Width="200" Height="30"/>
+                                    <Button x:Name="ui_form_nmo_form_mod_bml_uninstall" Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="3" Grid.Column="5" Content="卸载Ballance Mod Loader" Width="200" Height="30"/>
+
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="1" Foreground="White" FontSize="15" Text="搜索Mod：" />
+                                        <TextBox x:Name="ui_form_nmo_form_mod_mod_list_form_search" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="" Background="#00000000" BorderThickness="0,0,0,1"/>
+
+                                        <Grid Grid.Column="2" Grid.RowSpan="3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                        </Grid>
+
+                                    </Grid>
+                                    <TextBlock Foreground="White" FontSize="15" Grid.Row="2" Text="右击Mod列表以执行更多操作" TextAlignment="Center"/>
+
+                                    <Grid x:Name="ui_form_nmo_form_mod_mod_list_empty" Grid.Row="4" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有任何Mod" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_nmo_form_mod_mod_list" Background="#00000000" BorderThickness="0" Grid.Row="4" HorizontalContentAlignment="Stretch">
+                                        <!-- 右键菜单-->
+                                        <ListBox.ContextMenu>
+                                            <ContextMenu >
+                                                <MenuItem Header="安装/更新 Mod包" Click="ui_form_nmo_form_mod_mod_bag_add"/>
+                                                <Separator/>
+                                                <MenuItem Header="添加Mod" Click="ui_form_nmo_form_mod_mod_add"/>
+                                                <MenuItem Header="删除选中Mod" Click="ui_form_nmo_form_mod_mod_del"/>
+                                            </ContextMenu>
+                                        </ListBox.ContextMenu>
+                                    </ListBox>
+
+                                </Grid>
+
+                                <Grid Grid.Row="2" Grid.Column="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="1" Foreground="White" FontSize="15" Text="搜索模型：" />
+                                        <TextBox x:Name="ui_form_nmo_form_mod_ph_list_form_search" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="" Background="#00000000" BorderThickness="0,0,0,1"/>
+
+                                        <Grid Grid.Column="2" Grid.RowSpan="3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                        </Grid>
+
+                                    </Grid>
+                                    <TextBlock Foreground="White" FontSize="15" Grid.Row="2" Text="右击模型列表以执行更多操作" TextAlignment="Center"/>
+
+                                    <Grid x:Name="ui_form_nmo_form_mod_ph_list_empty" Grid.Row="4" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有任何模型" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_nmo_form_mod_ph_list" Background="#00000000" BorderThickness="0" Grid.Row="4" HorizontalContentAlignment="Stretch">
+                                        <!-- 右键菜单-->
+                                        <ListBox.ContextMenu>
+                                            <ContextMenu >
+                                                <MenuItem Header="安装/更新 模型包" Click="ui_form_nmo_form_mod_ph_bag_add"/>
+                                                <Separator/>
+                                                <MenuItem Header="添加模型" Click="ui_form_nmo_form_mod_ph_add"/>
+                                                <MenuItem Header="删除选中模型" Click="ui_form_nmo_form_mod_ph_del"/>
+                                            </ContextMenu>
+                                        </ListBox.ContextMenu>
+                                    </ListBox>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="纪录证明" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Foreground="White" FontSize="15" Grid.Row="1" Text="如果你破了纪录，需要开出你的纪录证明" TextAlignment="Center"/>
+                                <TextBlock Foreground="White" FontSize="15" Grid.Row="2" Text="这将检索你的Ballance的全部文件来证明你的纪录是合法的" TextAlignment="Center"/>
+
+                                <Button x:Name="ui_form_nmo_form_promise_open" Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="4" Width="200" Height="30" Content="立即开出证明"/>
+
+                                <TextBox Foreground="White" FontSize="15" Grid.Row="6" Text="" Background="#00000000" BorderThickness="0" IsReadOnly="True"/>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+
+
+                </Grid>
+            </TabItem>
+
+            <!-- -->
+            <TabItem Header="贴图与背景" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\texture.png"/>
+                </TabItem.BorderBrush>
+                <Grid Background="#00000000">
+
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TabControl x:Name="tabControl_4" Background="#00000000" BorderThickness="0" Grid.Column="1">
+
+                        <TabItem Header="材质" IsSelected="true" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="1" Foreground="White" FontSize="15" Text="搜索材质包：" />
+                                        <TextBox x:Name="ui_form_photo_form_material_list_form_search" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="" Background="#00000000" BorderThickness="0,0,0,1"/>
+
+                                        <Grid Grid.Column="2" Grid.RowSpan="3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <Grid x:Name="ui_form_photo_form_material_list_empty" Grid.Row="1" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有任何材质包" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_photo_form_material_list" Background="#00000000" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+
+                                </Grid>
+
+                                <Grid Grid.Column="1" Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+
+                                        <RowDefinition Height="2"/>
+
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="1" Content="添加材质包于列表" Width="200" Height="30" Click="ui_form_photo_form_material_add"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="3" Content="删除选中的材质包" Width="200" Height="30" Click="ui_form_photo_form_material_del"/>
+
+                                    <Grid Grid.Row="5" Background="white"/>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="7" Content="应用当前选中的材质包" Width="200" Height="30" Click="ui_form_photo_form_material_apply"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="9" Content="还原为原版材质" Width="200" Height="30" Click="ui_form_photo_form_material_return"/>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="关卡背景" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="1" Foreground="White" FontSize="15" Text="搜索背景包：" />
+                                        <TextBox x:Name="ui_form_photo_form_background_list_form_search" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="" Background="#00000000" BorderThickness="0,0,0,1"/>
+
+                                        <Grid Grid.Column="2" Grid.RowSpan="3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <Grid x:Name="ui_form_photo_form_background_list_empty" Grid.Row="1" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有任何背景包" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_photo_form_background_list" Background="#00000000" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+
+                                </Grid>
+
+                                <Grid Grid.Column="1" Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+
+                                        <RowDefinition Height="2"/>
+
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+
+                                        <RowDefinition Height="2"/>
+
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="1" Content="添加背景包于列表" Width="200" Height="30" Click="ui_form_photo_form_background_add_bag"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="3" Content="删除选中的背景包" Width="200" Height="30" Click="ui_form_photo_form_background_del_bag"/>
+
+                                    <Grid Grid.Row="5" Background="white"/>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="7" Content="应用当前选中的背景包" Width="200" Height="30" Click="ui_form_photo_form_background_apply"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="9" Content="还原为原版背景" Width="200" Height="30" Click="ui_form_photo_form_background_return"/>
+
+                                    <Grid Grid.Row="11" Background="white"/>
+
+                                    <TextBlock Foreground="white" FontSize="15" Grid.Row="13" Text="背景预览："/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="15" Content="选择背景序号" Width="200" Height="30" Click="ui_form_photo_form_background_select_preview_list"/>
+
+                                    <Grid Grid.Row="17" Width="200" Height="200">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- 背景图片-->
+                                        <Grid x:Name="ui_form_photo_form_background_bk_up" Grid.Row="0" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                        </Grid>
+                                        <Grid x:Name="ui_form_photo_form_background_bk_down" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+                                            <Grid.RenderTransform>
+                                                <RotateTransform Angle="180"></RotateTransform>
+                                            </Grid.RenderTransform>
+                                        </Grid>
+                                        <Grid x:Name="ui_form_photo_form_background_bk_left" Grid.Row="1" Grid.Column="0" RenderTransformOrigin="0.5,0.5">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+                                            <Grid.RenderTransform>
+                                                <RotateTransform Angle="270"></RotateTransform>
+                                            </Grid.RenderTransform>
+                                        </Grid>
+                                        <Grid x:Name="ui_form_photo_form_background_bk_right" Grid.Row="1" Grid.Column="2" RenderTransformOrigin="0.5,0.5">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+                                            <Grid.RenderTransform>
+                                                <RotateTransform Angle="90"></RotateTransform>
+                                            </Grid.RenderTransform>
+                                        </Grid>
+                                        <Grid x:Name="ui_form_photo_form_background_bk_middle" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                        </Grid>
+                                    </Grid>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+
+                </Grid>
+            </TabItem>
+
+            <!-- -->
+            <TabItem Header="音效与BGM" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\wave.png"/>
+                </TabItem.BorderBrush>
+                <Grid Background="#00000000">
+
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TabControl x:Name="tabControl_5" Background="#00000000" BorderThickness="0" Grid.Column="1">
+
+                        <TabItem Header="音效" IsSelected="true" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="1" Foreground="White" FontSize="15" Text="搜索音效包：" />
+                                        <TextBox x:Name="ui_form_wave_form_wave_list_form_search" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="" Background="#00000000" BorderThickness="0,0,0,1"/>
+
+                                        <Grid Grid.Column="2" Grid.RowSpan="3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <Grid x:Name="ui_form_wave_form_wave_list_empty" Grid.Row="1" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有任何音效包" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_wave_form_wave_list" Background="#00000000" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+
+                                </Grid>
+
+                                <Grid Grid.Column="1" Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+
+                                        <RowDefinition Height="2"/>
+
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="1" Content="添加音效包于列表" Width="200" Height="30" Click="ui_form_wave_form_wave_add"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="3" Content="删除选中的音效包" Width="200" Height="30" Click="ui_form_wave_form_wave_del"/>
+
+                                    <Grid Grid.Row="5" Background="white"/>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="7" Content="应用当前选中的音效包" Width="200" Height="30" Click="ui_form_wave_form_wave_apply"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="9" Content="还原为原版音效" Width="200" Height="30" Click="ui_form_wave_form_wave_return"/>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="BGM" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="1" Foreground="White" FontSize="15" Text="搜索BGM包：" />
+                                        <TextBox x:Name="ui_form_wave_form_bgm_list_form_search" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="" Background="#00000000" BorderThickness="0,0,0,1"/>
+
+                                        <Grid Grid.Column="2" Grid.RowSpan="3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\search.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Fill="#00000000" Stroke="white"/>
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <Grid x:Name="ui_form_wave_form_bgm_list_empty" Grid.Row="1" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有任何BGM包" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_wave_form_bgm_list"  Background="#00000000" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+
+                                </Grid>
+
+                                <Grid Grid.Column="1" Grid.Row="2">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+
+                                        <RowDefinition Height="2"/>
+
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+
+                                        <RowDefinition Height="2"/>
+
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="1" Content="添加BGM包于列表" Width="200" Height="30" Click="ui_form_wave_form_bgm_add"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="3" Content="删除选中的BGM包" Width="200" Height="30" Click="ui_form_wave_form_bgm_del"/>
+
+                                    <Grid Grid.Row="5" Background="white"/>
+
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="7" Content="应用当前选中的BGM包" Width="200" Height="30" Click="ui_form_wave_form_bgm_apply"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="9" Content="还原为原版BGM" Width="200" Height="30" Click="ui_form_wave_form_bgm_return"/>
+
+                                    <Grid Grid.Row="11" Background="white"/>
+
+                                    <TextBlock Foreground="white" FontSize="15" Grid.Row="13" Text="BGM试听："/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="15" Content="选择BGM序号" Width="200" Height="30" Click="ui_form_wave_form_bgm_select"/>
+                                    <Grid Grid.Row="17" Width="200" Height="200">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid Grid.Column="0" Grid.Row="0">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock x:Name="ui_form_wave_form_bgm_play_title_1" Foreground="White" FontSize="15" Text="Music_Theme_1_1.wav" Grid.Row="1"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Grid.Row="0" MouseDown="ui_form_wave_form_bgm_play_1">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Stroke="White"/>
+                                        </Grid>
+
+                                        <Grid Grid.Column="0" Grid.Row="2">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock x:Name="ui_form_wave_form_bgm_play_title_2" Foreground="White" FontSize="15" Text="Music_Theme_1_2.wav" Grid.Row="1"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Grid.Row="2" MouseDown="ui_form_wave_form_bgm_play_2">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Stroke="White"/>
+                                        </Grid>
+
+                                        <Grid Grid.Column="0" Grid.Row="4">
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock x:Name="ui_form_wave_form_bgm_play_title_3" Foreground="White" FontSize="15" Text="Music_Theme_1_3.wav" Grid.Row="1"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Grid.Row="4" MouseDown="ui_form_wave_form_bgm_play_3">
+                                            <Grid.Background >
+                                                <ImageBrush ImageSource="photo\right.png"/>
+                                            </Grid.Background>
+
+                                            <Ellipse Stroke="White"/>
+                                        </Grid>
+
+                                    </Grid>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+
+                </Grid>
+
+            </TabItem>
+
+            <!-- -->
+            <TabItem Header="游戏设置" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\contorl.png"/>
+                </TabItem.BorderBrush>
+                <Grid Background="#00000000">
+
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TabControl x:Name="tabControl_6" Background="#00000000" BorderThickness="0" Grid.Column="1">
+
+                        <TabItem Header="语言与全屏" IsSelected="true" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Name="ui_form_setting_form_1_fullscreen" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="当前全屏状态："/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" x:Name="ui_form_setting_form_1_fullscreen_btn" Grid.RowSpan="3" Grid.Column="3" Content="修改为" Width="200" Height="30"/>
+
+                                </Grid>
+
+                                <Grid Grid.Row="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Name="ui_form_setting_form_1_language" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="当前语言状态："/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="3" Grid.Column="3" Content="修改为..." Width="200" Height="30" Click="ui_form_setting_form_1_language_change"/>
+
+                                </Grid>
+
+                                <Grid Grid.Row="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="10"/>
+                                        
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="当前游戏分辨率："/>
+                                    <TextBox x:Name="ui_form_setting_form_1_size_width" Grid.Row="1" Grid.Column="3" Background="#00000000" Foreground="White" FontSize="15" Text="" BorderThickness="0,0,0,1"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="4" Foreground="White" FontSize="15" Text=" x "/>
+                                    <TextBox x:Name="ui_form_setting_form_1_size_height" Grid.Row="1" Grid.Column="5" Background="#00000000" Foreground="White" FontSize="15" Text="" BorderThickness="0,0,0,1"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="3" Grid.Column="7" Content="修改" Width="200" Height="30" Click="ui_form_setting_form_1_size_change"/>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="本地排行榜" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="10"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="3" Foreground="Red" FontSize="15" Text="会丢失所有成绩记录"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="3" Grid.Column="1" Content="关卡全开" Width="200" Height="30" Click="ui_form_setting_form_local_hero_open_all"/>
+
+                                </Grid>
+                                <Grid Grid.Row="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Foreground="White" FontSize="15" Text="当前排行榜分数："/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="2" Grid.Column="3" Content="读取" Width="200" Height="30" Click="ui_form_setting_form_local_hero_read"/>
+
+                                    <Grid x:Name="ui_form_setting_form_local_hero_list_empty" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Opacity="0">
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Foreground="White" FontSize="15" Text="没有检测本地排行榜" Grid.Row="1" TextAlignment="Center"/>
+                                    </Grid>
+                                    <ListBox x:Name="ui_form_setting_form_local_hero_list" Background="#00000000" BorderThickness="0" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" HorizontalContentAlignment="Stretch">
+                                        <ListBox.GroupStyle>
+                                            <GroupStyle>
+                                                <GroupStyle.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Background="#af6495ed" Height="40">
+                                                            <Grid.RowDefinitions >
+                                                                <RowDefinition Height="*"/>
+                                                                <RowDefinition Height="2"/>
+                                                            </Grid.RowDefinitions>
+
+                                                            <Grid>
+                                                                <Grid.RowDefinitions >
+                                                                    <RowDefinition Height="*"/>
+                                                                    <RowDefinition Height="auto"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+
+                                                                <TextBlock Grid.Row="1" FontSize="15" Foreground="White" Text="{Binding Name}" TextAlignment="Center"/>
+                                                            </Grid>
+
+                                                            <Grid Grid.Row="1" Background="White" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </GroupStyle.HeaderTemplate>
+                                            </GroupStyle>
+                                        </ListBox.GroupStyle>
+                                    </ListBox>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="排行榜备份" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="10"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Foreground="White" FontSize="15" Text="右击排行榜备份列表执行更多操作" TextAlignment="Center" Grid.Row="1"/>
+                                </Grid>
+                                <Grid x:Name="ui_form_setting_form_local_hero_backups_list_empty" Grid.Row="3" Opacity="0">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Foreground="White" FontSize="15" Text="没有任何排行榜备份" Grid.Row="1" TextAlignment="Center"/>
+                                </Grid>
+                                <ListBox x:Name="ui_form_setting_form_local_hero_backups_list" Grid.Row="3" Background="#00000000" BorderThickness="0" HorizontalContentAlignment="Stretch" FontSize="15" Foreground="white">
+                                    <!-- 右键菜单-->
+                                    <ListBox.ContextMenu>
+                                        <ContextMenu >
+                                            <MenuItem Header="新建排行榜备份" Click="ui_form_setting_form_local_hero_list_new"/>
+                                            <MenuItem Header="删除当前选中的排行榜备份" Click="ui_form_setting_form_local_hero_list_del"/>
+                                            <Separator/>
+                                            <MenuItem Header="将当前选中的排行榜备份应用" Click="ui_form_setting_form_local_hero_list_apply"/>
+                                        </ContextMenu>
+                                    </ListBox.ContextMenu>
+
+                                </ListBox>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+
+                </Grid>
+
+            </TabItem>
+
+            <!-- -->
+            <TabItem Header="关于" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\about.png"/>
+                </TabItem.BorderBrush>
+                <Grid Background="#00000000">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="百度Ballance吧保留所有权利 (C) 2012-2016"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="Ballance工具箱"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools.exe   语言：Vb.net   Ballance工具箱主程序   Version 3.0.0.0"/>
+                    <TextBlock Grid.Row="5" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="ScoreManager.dll   语言：C#   Ballance工具箱连接ScoreManager库   Version 1.0.0.0"/>
+                    <TextBlock Grid.Row="6" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="ICSharpCode.SharpZipLib.dll   语言：C#   压缩文件压缩/解压缩库   Version 0.86.0.518"/>
+
+                    <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="跟随我们："/>
+                        <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff1e90ff" FontSize="15" Text="http://tieba.baidu.com/f?kw=ballance" MouseDown="ui_form_about_follow"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="开源地址（Github）："/>
+                        <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff1e90ff" FontSize="15" Text="https://github.com/yyc12345/ballance_tools" MouseDown="ui_form_about_open"/>
+                    </StackPanel>
+
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

@@ -1,0 +1,70 @@
+﻿<Window x:Class="Window_user_login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ballance_tools"
+        mc:Ignorable="d"
+        Title="用户登录 --- ScoreManager" Height="300" Width="500" Icon="icon.ico">
+    <Grid Background="#FF2D2D2D">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="*"/>
+
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="12" TextAlignment="Center" Text="您需要登录到ScoreManager才能获取更多信息"/>
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Foreground="White" FontSize="15" Text="用户名："/>
+            <TextBox x:Name="ui_window_user_login_user_name" Background="#00000000" Grid.Column="1" Foreground="White" FontSize="15" Text="" BorderThickness="0,0,0,1"/>
+
+        </Grid>
+
+        <Grid Grid.Row="5" Grid.Column="1">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Foreground="White" FontSize="15" Text="密码："/>
+            <PasswordBox x:Name="ui_window_user_login_user_password" Grid.Column="1" Background="#00000000" BorderThickness="0,0,0,1" Foreground="White" FontSize="15"/>
+
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="7" Background="#5f00ff00" />
+        <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Column="1" Grid.Row="7" Content="登录" Click="ui_window_user_login_login"/>
+
+        <Grid Grid.Row="9" Grid.Column="1">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Foreground="White" Background="#8f1e90ff" FontSize="15"  Content="注册" Grid.Column="0" Click="ui_window_user_login_get_user"/>
+            <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Content="跳过登录" Grid.Column="2" Click="ui_window_user_login_jump"/>
+        </Grid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,475 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ballance_tools_deploy"
+        mc:Ignorable="d"
+        Title="Ballance工具箱部署器" Height="400" Width="800" FontFamily="Microsoft YaHei UI Light" Icon="icon.ico" Loaded="app_start">
+    <Grid Background="#ff2d2d2d">
+        <!--<Grid.RowDefinitions >
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>-->
+
+        <TabControl x:Name="tab_contorl_main" Margin="30,30,30,30" Grid.Row="1" Grid.Column="1" Background="#00000000" BorderThickness="0">
+
+            <TabItem Header="部署" IsSelected="True">
+
+                <TabControl x:Name="tab_contorl" Margin="0,30,0,0" Grid.Row="1" Grid.Column="1" Background="#00000000" BorderThickness="0">
+
+                    <!-- foreword-->
+                    <TabItem Header="概述" IsSelected="True">
+                        <TextBlock Text="本程序是为 Ballance工具箱 做提前部署之用，提前部署，就是把一些需要耗费大量网络资源的&#x000A;
+内容让用户自行选择下载并使用该程序在使用Ballance工具箱之前部署这些内容。&#x000A;
+所以，建议是，一定要部署Cache，其余酌情部署。若不部署Cache，第一次启动工具箱会非常&#x000A;
+慢，而且占用网络下载大量内容。" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </TabItem>
+
+                    <!-- cache-->
+                    <TabItem Header="Cache">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Cache主要是工具箱中的各种非Ballance自带图片的图片的信息源&#x000A;
+部署其的目的是增加第一次启动工具箱的速度，因为每次启动工具箱都会检查是否需要更新Cache" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="6"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="Cache打包文件：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_cache_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择打包文件" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="select_packups"/>
+                            <Button Content="立即部署" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="file_free"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- material-->
+                    <TabItem Header="原版材质包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="原版材质包是工具箱中材质界面的还原为原版材质所需的文件，没有此文件，还原无法进行&#x000A;
+该部署可有可无，如果你需要的话，可以部署" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="6"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="原版材质包打包文件：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_material_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择打包文件" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="select_packups"/>
+                            <Button Content="立即部署" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="file_free"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- background-->
+                    <TabItem Header="原版背景包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="原版背景包是工具箱中背景界面的还原为原版背景所需的文件，没有此文件，还原无法进行&#x000A;
+该部署可有可无，如果你需要的话，可以部署" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="6"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="原版背景包打包文件：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_background_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择打包文件" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="select_packups"/>
+                            <Button Content="立即部署" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="file_free"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- wave-->
+                    <TabItem Header="原版音效包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="原版音效包是工具箱中音效界面的还原为原版音效所需的文件，没有此文件，还原无法进行&#x000A;
+该部署可有可无，如果你需要的话，可以部署" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="6"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="原版音效包打包文件：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_wave_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择打包文件" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="select_packups"/>
+                            <Button Content="立即部署" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="file_free"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- bgm-->
+                    <TabItem Header="原版BGM包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="原版BGM包是工具箱中BGM界面的还原为原版BGM所需的文件，没有此文件，还原无法进行&#x000A;
+该部署可有可无，如果你需要的话，可以部署" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="6"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="原版BGM包打包文件：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_bgm_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择打包文件" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="select_packups"/>
+                            <Button Content="立即部署" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="file_free"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- bml-->
+                    <TabItem Header="BML安装源">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="BML安装源是工具箱中Mod界面的安装BML所需的文件，没有此文件，无法安装BML&#x000A;
+该部署可有可无，如果你需要的话，可以部署，BML是Ballance Mod加载器的简称" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="6"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="BML安装源文件：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_bml_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择源文件" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="select_packups"/>
+                            <Button Content="立即部署" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="file_free"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                </TabControl>
+                
+            </TabItem>
+
+            <TabItem Header="资源打包">
+
+                <TabControl x:Name="tab_contorl_pack" Margin="0,30,0,0" Background="#00000000" BorderThickness="0">
+                    
+                    <!-- foreword-->
+                    <TabItem Header="概述" IsSelected="True">
+                        <TextBlock Text="本模块是为 Ballance工具箱 做资源打包之用，打包资源，就是把本地的属于你自己的Ballance个性化&#x000A;
+内容打包进一个压缩包里，随后发布给其他人，让你给他们也能够有更好的游戏体验；内容包括：音效、&#x000A;
+BGM、材质、背景这4项。打包可选择Zip格式或 Ballance工具箱 格式，实质上两者的文件完全相同，只是&#x000A;
+改变了后缀名。" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </TabItem>
+
+                    <!-- material-->
+                    <TabItem Header="材质包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="材质包是工具箱中材质界面的所显示的包文件，材质主要负责对游戏中物体的表面材料&#x000A;
+进行描述与呈现，替换之后游戏风格会有所变化。" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="4"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="材质包保存地址：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_pack_material_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择保存地址" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="set_save_zip_path"/>
+
+
+                            <Button Content="立即打包" FontSize="15" Foreground="white" Grid.Row="5" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="save_zip_pack"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- Background-->
+                    <TabItem Header="背景包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="背景包是工具箱中背景界面的所显示的包文件，背景主要负责对游戏中最低层的背景图片&#x000A;
+进行渲染与呈现，替换之后游戏底部的天空会随之变化。编号不同的背景对应不同的关卡&#x000A;
+背景，请打开资源管理器确认你需要保存的背景编号（如果需要）。" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="8"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="背景包保存地址：" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="ui_pack_background_group" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="3" Text="保存编号：A" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_pack_background_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择保存地址" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="set_save_zip_path"/>
+                            <Button Content="选择背景编号" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="7" Background="#ff1e90ff" BorderThickness="1" Click="ui_pack_background_select"/>
+
+
+                            <Button Content="立即打包" FontSize="15" Foreground="white" Grid.Row="5" Grid.Column="7" Background="#ff1e90ff" BorderThickness="1" Click="save_zip_pack"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- BGM-->
+                    <TabItem Header="BGM包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="BGM包是工具箱中BGM界面的所显示的包文件，BGM主要是对游戏进行时发出的背景音乐&#x000A;
+替换之后游戏每关的背景音乐的。编号不同的BGM对应不同的关卡的BGM请打开资源管理器&#x000A;
+确认你需要保存的BGM编号（如果需要）。" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="8"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="BGM包保存地址：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_pack_bgm_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择保存地址" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1"/>
+
+                            <Button Content="立即打包" FontSize="15" Foreground="white" Grid.Row="5" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="save_zip_pack"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- material-->
+                    <TabItem Header="音效包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="音效包是工具箱中音效界面的所显示的包文件，音效主要描述游戏中各个物体碰撞&#x000A;
+时的声音，替换之后各个物体碰撞、菜单、过关的声音等会变化。" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="4"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="音效包保存地址：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_pack_wave_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择保存地址" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="set_save_zip_path"/>
+
+
+                            <Button Content="立即打包" FontSize="15" Foreground="white" Grid.Row="5" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="save_zip_pack"/>
+
+                        </Grid>
+
+                    </TabItem>
+                    
+                    <!-- mod-->
+                    <TabItem Header="Mod包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Mod包是工具箱中Mod界面的所显示的文件的打包状态，Mod依赖游戏附属组件BML来运行&#x000A;
+使用Mod可让游戏更有趣味，但会让你的记录难以审核通过。在工具箱Mod界面可选择Mod包&#x000A;
+并将其中的Mod释放可供使用" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="4"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="Mod包保存地址：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_pack_mod_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择保存地址" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="set_save_zip_path"/>
+
+
+                            <Button Content="立即打包" FontSize="15" Foreground="white" Grid.Row="5" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="save_zip_pack"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                    <!-- mod-->
+                    <TabItem Header="模型包">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="模型包是工具箱中模型界面的所显示的文件的打包状态，模型在原版游戏中即存在&#x000A;
+但一些Mod可能需要额外的模型来构成Mod的一部分，您需要在打包有些Mod时&#x000A;
+附带上它需要的模型包。游戏中的一切元素均为模型" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="4"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="模型包保存地址：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_pack_ph_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择保存地址" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="set_save_zip_path"/>
+
+
+                            <Button Content="立即打包" FontSize="15" Foreground="white" Grid.Row="5" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="save_zip_pack"/>
+
+                        </Grid>
+
+                    </TabItem>
+
+                </TabControl>
+                
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

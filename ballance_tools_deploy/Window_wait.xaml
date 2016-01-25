@@ -1,0 +1,23 @@
+﻿<Window x:Class="Window_wait"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ballance_tools_deploy"
+        mc:Ignorable="d"
+        Title="请稍候" Height="200" Width="400" FontFamily="Microsoft YaHei UI Light" Icon="icon.ico">
+    <Grid Background="#FF2D2D2D">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Foreground="White" FontSize="15" Grid.Row="1" Text="请稍后，我们正在处理一些事情" TextAlignment="Center"/>
+
+        <TextBlock Foreground="White" FontSize="12" Grid.Row="3" Text="请不要关闭窗口" TextAlignment="Center"/>
+           
+    </Grid>
+</Window>
