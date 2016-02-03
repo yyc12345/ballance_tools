@@ -306,6 +306,34 @@ Public Class ui_depend_form_setting_form_local_hero_backups_list
 End Class
 
 
+''' <summary>
+''' 联网对战-加入服务器的人员列表所用的类
+''' </summary>
+Public Class ui_depend_form_web_form_people_list
+    ''' <summary>
+    ''' 加入人的名称代号
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_name As String
+    ''' <summary>
+    ''' 加入人的名称代号
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_ip As String
+    ''' <summary>
+    ''' 加入人的名称代号
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_port As String
+    ''' <summary>
+    ''' 加入人的名称代号
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_state As String
+
+End Class
+
+
 
 ''' <summary>
 ''' 窗口-选择项使用的类

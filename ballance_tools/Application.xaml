@@ -1061,6 +1061,62 @@
 
         <!-- ************************************************************************************************-->
 
+        <!-- 联机对战-加入服务器人员列表的模板-->
+        <DataTemplate x:Key="ui_temp_windows10_form_web_form_people_list">
+            <Grid Height="50" Background="#5f6495ed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Foreground="White" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{Binding pro_name}" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="White" FontSize="15" Grid.Column="3" Grid.Row="1" Text="{Binding pro_ip}" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="White" FontSize="15" Grid.Column="5" Grid.Row="1" Text="{Binding pro_port}" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="White" FontSize="15" Grid.Column="7" Grid.Row="1" Text="{Binding pro_state}" HorizontalAlignment="Center"/>
+
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ui_temp_windows7_form_web_form_people_list">
+            <Grid Height="50" Background="white">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Foreground="black" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{Binding pro_name}" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="black" FontSize="15" Grid.Column="3" Grid.Row="1" Text="{Binding pro_ip}" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="black" FontSize="15" Grid.Column="5" Grid.Row="1" Text="{Binding pro_port}" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="black" FontSize="15" Grid.Column="7" Grid.Row="1" Text="{Binding pro_state}" HorizontalAlignment="Center"/>
+
+            </Grid>
+        </DataTemplate>
+
+        <!-- ************************************************************************************************-->
+
         <!-- 窗口-选择项目的模板-->
         <DataTemplate x:Key="ui_temp_windows10_window_select_item_list">
             <Grid Height="80" Background="#5f6495ed">
@@ -1140,7 +1196,7 @@
                     <!--<RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>-->
                     <ColumnDefinition Width ="1E-05*"/>
                 </Grid.ColumnDefinitions>
-                <Grid>
+                <Grid Opacity="0.5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="5"/>
@@ -1374,7 +1430,7 @@
                     <!--<RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>-->
                     <RowDefinition Height="1E-05*"/>
                 </Grid.RowDefinitions>
-                <Grid>
+                <Grid Opacity="0.5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="5"/>

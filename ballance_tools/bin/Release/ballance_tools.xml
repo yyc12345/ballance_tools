@@ -338,6 +338,35 @@ ballance_tools
  </summary>
  <returns></returns>
 </member>
+<member name="T:ballance_tools.ui_depend_form_web_form_people_list">
+ <summary>
+ 联网对战-加入服务器的人员列表所用的类
+ </summary>
+</member>
+<member name="P:ballance_tools.ui_depend_form_web_form_people_list.pro_name">
+ <summary>
+ 加入人的名称代号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:ballance_tools.ui_depend_form_web_form_people_list.pro_ip">
+ <summary>
+ 加入人的名称代号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:ballance_tools.ui_depend_form_web_form_people_list.pro_port">
+ <summary>
+ 加入人的名称代号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:ballance_tools.ui_depend_form_web_form_people_list.pro_state">
+ <summary>
+ 加入人的名称代号
+ </summary>
+ <returns></returns>
+</member>
 <member name="T:ballance_tools.ui_depend_window_select_item_list">
  <summary>
  窗口-选择项使用的类
@@ -428,6 +457,11 @@ ballance_tools
 <member name="F:ballance_tools.ui_use.ui_connect_form_nmo_form_mod_ph_list">
  <summary>
  nmo-模组列表集合
+ </summary>
+</member>
+<member name="F:ballance_tools.ui_use.ui_connect_form_web_form_people_list">
+ <summary>
+ 联网对战-加入服务器人员列表集合
  </summary>
 </member>
 <member name="F:ballance_tools.ui_use.ui_connect_form_setting_form_local_hero_backups_list">

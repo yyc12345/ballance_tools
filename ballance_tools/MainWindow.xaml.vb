@@ -478,6 +478,7 @@ Class MainWindow
             ui_form_nmo_form_mod_mod_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_nmo_form_mod_mod_list"), DataTemplate)
             ui_form_nmo_form_mod_ph_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_nmo_form_mod_ph_list"), DataTemplate)
             ui_form_setting_form_local_hero_backups_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_setting_form_local_hero_backups_list"), DataTemplate)
+            ui_form_web_form_people_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_web_form_people_list"), DataTemplate)
 
             If use_debug_log = True Then
                 debug_log.WriteLine("检测到windows8(包括)以上os")
@@ -496,6 +497,7 @@ Class MainWindow
             ui_form_nmo_form_mod_mod_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_nmo_form_mod_mod_list"), DataTemplate)
             ui_form_nmo_form_mod_ph_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_nmo_form_mod_ph_list"), DataTemplate)
             ui_form_setting_form_local_hero_backups_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_setting_form_local_hero_backups_list"), DataTemplate)
+            ui_form_web_form_people_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_web_form_people_list"), DataTemplate)
 
             If use_debug_log = True Then
                 debug_log.WriteLine("检测到windows8(不包括)以下os")
@@ -519,6 +521,7 @@ Class MainWindow
         ui_form_nmo_form_mod_mod_list.ItemsSource = ui_connect_form_nmo_form_mod_mod_list
         ui_form_nmo_form_mod_ph_list.ItemsSource = ui_connect_form_nmo_form_mod_ph_list
         ui_form_setting_form_local_hero_backups_list.ItemsSource = ui_connect_form_setting_form_local_hero_backups_list
+        ui_form_web_form_people_list.ItemsSource = Nothing
 
         If use_debug_log = True Then
             debug_log.WriteLine("列表资源已建立连接")
@@ -3760,6 +3763,10 @@ Class MainWindow
 
     End Sub
 
+
+#End Region
+
+#Region "联网对战"
 
 #End Region
 

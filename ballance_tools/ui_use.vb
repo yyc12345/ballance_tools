@@ -66,13 +66,17 @@ Module ui_use
     ''' </summary>
     Public ui_connect_form_nmo_form_mod_ph_list As New List(Of ui_depend_form_nmo_form_mod_ph_list)
     ''' <summary>
+    ''' 联网对战-加入服务器人员列表集合
+    ''' </summary>
+    Public ui_connect_form_web_form_people_list As New List(Of ui_depend_form_web_form_people_list)
+    ''' <summary>
     ''' 设置-本地排行榜列表集合
     ''' </summary>
     Public ui_connect_form_setting_form_local_hero_backups_list As New List(Of ui_depend_form_setting_form_local_hero_backups_list)
 
 #End Region
 
-#Region "UI列表集合"
+#Region "UI列表集合--搜索"
 
     ''' <summary>
     ''' 关卡-地图列表集合-搜索专用

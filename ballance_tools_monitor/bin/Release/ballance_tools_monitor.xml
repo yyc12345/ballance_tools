@@ -1,0 +1,100 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ballance_tools_monitor
+</name>
+</assembly>
+<members>
+<member name="T:ballance_tools_monitor.Application">
+<summary>
+Application
+</summary>
+</member>
+<member name="M:ballance_tools_monitor.Application.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="M:ballance_tools_monitor.Application.Main">
+<summary>
+Application Entry Point.
+</summary>
+</member>
+<member name="T:ballance_tools_monitor.MainWindow">
+<summary>
+MainWindow
+</summary>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.SendMessage(System.Int32,System.Int32,System.Int32,System.Int32)">
+ <summary>
+ [系统][ui]向指定窗口的消息循环队列中发送消息
+ </summary>
+ <param name="hwnd">指定窗口的句柄</param>
+ <param name="wMsg">发送内容</param>
+ <param name="wParam">附加1</param>
+ <param name="lParam">附加2</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.ReleaseCapture">
+ <summary>
+ [系统][ui]取消鼠标按下状态
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:ballance_tools_monitor.My.MyWpfExtension">
+ <summary>
+ 用于定义“我的 WPF 命名空间”中的可用属性的模块
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:ballance_tools_monitor.My.MyWpfExtension.Application">
+ <summary>
+ 返回正在运行的应用程序的应用程序对象
+ </summary>
+</member>
+<member name="P:ballance_tools_monitor.My.MyWpfExtension.Computer">
+ <summary>
+ 返回有关主机计算机的信息。
+ </summary>
+</member>
+<member name="P:ballance_tools_monitor.My.MyWpfExtension.User">
+ <summary>
+ 返回当前用户的信息。  如果希望使用当前的 
+ Windows 用户凭据来运行应用程序，请调用 My.User.InitializeWithWindowsUser()。
+ </summary>
+</member>
+<member name="P:ballance_tools_monitor.My.MyWpfExtension.Log">
+ <summary>
+ 返回应用程序日志。可以使用应用程序的配置文件配置侦听器。
+ </summary>
+</member>
+<member name="P:ballance_tools_monitor.My.MyWpfExtension.Windows">
+ <summary>
+ 返回项目中定义的 Windows 集合。
+ </summary>
+</member>
+<member name="T:ballance_tools_monitor.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ballance_tools_monitor.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ballance_tools_monitor.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+</members>
+</doc>

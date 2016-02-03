@@ -1289,6 +1289,102 @@
             </TabItem>
 
             <!-- -->
+            <TabItem Header="联机对战" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\web.png"/>
+                </TabItem.BorderBrush>
+                <Grid Background="#00000000">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TabControl x:Name="tabControl_7" Background="#00000000" BorderThickness="0" Grid.Column="1">
+                                               
+                        <TabItem Header="连接服务器" IsSelected="true" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Expander Grid.Row="3" Header="IP与端口信息" Foreground="White" FontSize="15">
+                                    <StackPanel Grid.Row="1">
+                                        <TextBlock Foreground="White" FontSize="15" Text="本机IP地址：0.0.0.0"/>
+                                    <TextBlock Foreground="White" FontSize="15" Text="本机端口：0000"/>
+                                    <TextBlock Foreground="White" FontSize="15" Text="服务器IP地址：0.0.0.0"/>
+                                    <TextBlock Foreground="White" FontSize="15" Text="服务器端口：0000"/>
+                                </StackPanel>
+                                </Expander>
+                                                              
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Column="1" Content="创建服务器" Width="200" Height="30"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Column="3" Content="加入服务器" Width="200" Height="30"/>
+                                    <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Column="5" Content="离开/解散服务器" Width="200" Height="30"/>
+                                    
+                                </Grid>
+
+                                <TextBlock Grid.Row="5" Foreground="White" FontSize="15" Text="当前服务器人员列表："/>
+
+                                <ListBox x:Name="ui_form_web_form_people_list" Grid.Row="7" Background="#00000000" BorderThickness="0"/>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem Header="游戏设定" IsSelected="true" Style="{DynamicResource tab_temp_2}">
+
+                            <Grid Background="#00000000">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Foreground="White" FontSize="15" Text="你在游戏中显示的名字：" Grid.Column="0" VerticalAlignment="Center"/>
+                                    <TextBox Foreground="White" Text="Ballancer?" FontSize="15" Background="#00000000" BorderThickness="0,0,0,1" Grid.Column="1" VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <TextBlock Foreground="White" FontSize="15" Text="名字将会在重新加入服务器后更新（如果你已加入过服务器再修改名字的话）&#x000A;
+联机所打的关卡将会被加载在第1关，请选择第1关进入即可参与联机，将在所有人确认进入后开始起跑倒计时&#x000A;
+起跑倒计时中按下任何键均属于作弊，取消资格，请注意！" Grid.Row="3"/>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+                    
+                </Grid>
+            </TabItem>
+
+            <!-- -->
             <TabItem Header="关于" Style="{DynamicResource tab_temp_1}">
                 <TabItem.BorderBrush>
                     <ImageBrush ImageSource="photo\about.png"/>

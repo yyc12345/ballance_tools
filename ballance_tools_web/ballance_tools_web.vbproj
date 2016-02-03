@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ADA71F5E-E25A-48EB-8134-F81B0A7633FC}</ProjectGuid>
+    <ProjectGuid>{C8D10BE3-B863-42C6-BDF0-8F50994EB10C}</ProjectGuid>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ballance_tools</RootNamespace>
-    <AssemblyName>ballance_tools</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>ballance_tools_web</RootNamespace>
+    <AssemblyName>ballance_tools_web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MyType>Custom</MyType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -20,7 +20,7 @@
     <DefineTrace>true</DefineTrace>
     <IncrementalBuild>true</IncrementalBuild>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>ballance_tools.xml</DocumentationFile>
+    <DocumentationFile>ballance_tools_web.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,9 +32,8 @@
     <IncrementalBuild>false</IncrementalBuild>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>ballance_tools.xml</DocumentationFile>
+    <DocumentationFile>ballance_tools_web.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -48,31 +47,8 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>false</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>F:\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ScoreManager">
-      <HintPath>..\ScoreManager\bin\Release\ScoreManager.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -84,28 +60,14 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="systems.vb" />
-    <Compile Include="ui_depend.vb" />
-    <Compile Include="ui_use.vb" />
-    <Compile Include="web_socket.vb" />
-    <Compile Include="Window_new_player.xaml.vb">
-      <DependentUpon>Window_new_player.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Window_select_item.xaml.vb">
-      <DependentUpon>Window_select_item.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Window_user_login.xaml.vb">
-      <DependentUpon>Window_user_login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Window_wait.xaml.vb">
-      <DependentUpon>Window_wait.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ui.vb" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,24 +80,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Window_new_player.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window_select_item.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window_user_login.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window_wait.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Import Include="System.Threading.Tasks" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="Microsoft.VisualBasic" />
@@ -172,11 +119,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <None Include="My Project\app.manifest" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
@@ -184,36 +130,7 @@
     <AppDesigner Include="My Project\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="photo\contorl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="photo\home.png" />
-    <Resource Include="photo\level.png" />
-    <Resource Include="photo\nmo.png" />
-    <Resource Include="photo\texture.png" />
-    <Resource Include="photo\wave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="photo\about.png" />
-    <Resource Include="photo\search.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="photo\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <SplashScreen Include="start.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="photo\right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="photo\web.png" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
