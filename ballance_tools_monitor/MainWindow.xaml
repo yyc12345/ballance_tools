@@ -28,42 +28,45 @@
         <Grid Background="#ff1e90ff" Grid.ColumnSpan="3" MouseDown="window_move"/>
 
         <!-- cpu/memory占用量-->
-        <ProgressBar Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="#00000000" Value="0" Orientation="Vertical" Foreground="#7f1e90ff" BorderThickness="0">
+        <ProgressBar x:Name="ui_cpu_progress" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="#00000000" Value="0" Orientation="Vertical" Foreground="#ff117dbb" BorderThickness="0">
             <ProgressBar.ToolTip >
                 <StackPanel>
                     <TextBlock Text="CPU占用量："/>
-                    <TextBlock Text="0%"/>
+                    <TextBlock x:Name="ui_cpu_progress_text" Text="0%"/>
                 </StackPanel>
             </ProgressBar.ToolTip>
         </ProgressBar>
-        <ProgressBar Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Background="#00000000" Value="0" Orientation="Vertical" Foreground="#7f1e90ff" BorderThickness="0">
+        <ProgressBar x:Name="ui_memory_progress" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Background="#00000000" Value="0" Orientation="Vertical" Foreground="#ff8b12ae" BorderThickness="0">
             <ProgressBar.ToolTip >
                 <StackPanel>
-                    <TextBlock Text="CPU占用量："/>
-                    <TextBlock Text="0%"/>
+                    <TextBlock Text="内存占用量："/>
+                    <TextBlock x:Name="ui_memory_progress_text" Text="0%"/>
                 </StackPanel>
             </ProgressBar.ToolTip>
         </ProgressBar>
 
         <!-- 文本-->
         <ScrollViewer Grid.Row="1" Grid.Column="2">
-            <TextBlock x:Name="ui_message" Foreground="#ff7f7f7f" Text="" TextWrapping="Wrap" FontSize="15"/>
+            <TextBlock x:Name="ui_message" Foreground="#ffff0000" Text="" TextWrapping="Wrap"/>
         </ScrollViewer>
         
         <!-- 操作-->
         <Grid Grid.Row="2" Grid.Column="2">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="再来" Foreground="White" Background="#ff1e90ff" Margin="3" Template="{DynamicResource ButtonControlTemplate_blue}"/>
-            <Button Grid.Column="3" Content="结束" Foreground="White" Background="#ff1e90ff" Margin="3" Template="{DynamicResource ButtonControlTemplate_blue}"/>
+            <Button Grid.Column="1" Content="暂停/继续" Foreground="White" Background="#ff1e90ff" Margin="3" Template="{DynamicResource ButtonControlTemplate_blue}" Click="ui_continue">
+                
+            </Button>
+            <Button Grid.Column="3" Content="结束" Foreground="White" Background="#ff1e90ff" Margin="3" Template="{DynamicResource ButtonControlTemplate_blue}" Click="ui_stop"/>
 
         </Grid>
 
     </Grid>
+    
 </Window>

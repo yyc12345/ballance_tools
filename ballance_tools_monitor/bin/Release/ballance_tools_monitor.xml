@@ -43,6 +43,95 @@ MainWindow
  </summary>
  <remarks></remarks>
 </member>
+<member name="F:ballance_tools_monitor.MainWindow.system_timer">
+ <summary>
+ 获取cpu/内存占用的计时器
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.keyboard_timer">
+ <summary>
+ 获取键盘按键的计时器
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.cpu_count">
+ <summary>
+ 获取cpu占用的函数
+ </summary>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.all_memory">
+ <summary>
+ 总内存大小
+ </summary>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.use_memory">
+ <summary>
+ 当前使用的内存大小
+ </summary>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.kh">
+ <summary>
+ 键盘hook
+ </summary>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.ready_state">
+ <summary>
+ 准备状态-true=正在hook false-暂停
+ </summary>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.before_word">
+ <summary>
+ 之前的检测文字
+ </summary>
+</member>
+<member name="F:ballance_tools_monitor.MainWindow.warning_word">
+ <summary>
+ 警告
+ </summary>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.system_timer_function(System.Object,System.EventArgs)">
+ <summary>
+ cpu/内存的计时器刷新函数
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.keyboard_timer_function(System.Object,System.Windows.Forms.KeyEventArgs)">
+ <summary>
+ 键盘函数
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.app_init(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 初始化应用
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.ui_continue(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 暂停/继续
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.ui_stop(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ 结束
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:ballance_tools_monitor.MainWindow.app_exit(System.Object,System.EventArgs)">
+ <summary>
+ 退出
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
 <member name="M:ballance_tools_monitor.MainWindow.InitializeComponent">
 <summary>
 InitializeComponent
@@ -82,18 +171,18 @@ InitializeComponent
 </member>
 <member name="T:ballance_tools_monitor.My.Resources.Resources">
 <summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
+  一个强类型的资源类，用于查找本地化的字符串等。
 </summary>
 </member>
 <member name="P:ballance_tools_monitor.My.Resources.Resources.ResourceManager">
 <summary>
-  Returns the cached ResourceManager instance used by this class.
+  返回此类使用的缓存的 ResourceManager 实例。
 </summary>
 </member>
 <member name="P:ballance_tools_monitor.My.Resources.Resources.Culture">
 <summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
+  使用此强类型资源类，为所有资源查找
+  重写当前线程的 CurrentUICulture 属性。
 </summary>
 </member>
 </members>

@@ -12,10 +12,10 @@ Imports System.Windows
 '查看程序集特性的值
 
 <Assembly: AssemblyTitle("ballance_tools_monitor")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyDescription("Ballance监控")>
+<Assembly: AssemblyCompany("Ballance Bar")>
 <Assembly: AssemblyProduct("ballance_tools_monitor")>
-<Assembly: AssemblyCopyright("Copyright ©  2016")>
+<Assembly: AssemblyCopyright("Copyright © Ballance Bar 2012-2016")>
 <Assembly: AssemblyTrademark("")>
 <Assembly: ComVisible(false)>
 
