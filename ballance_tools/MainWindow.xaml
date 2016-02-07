@@ -80,7 +80,7 @@
                     </Grid>
 
                     <TextBlock Grid.Column="1" Foreground="White" FontSize="20" Text="Ballance" Grid.Row="3" Background="#00000000" TextAlignment="Center"/>
-                    
+
                     <!-- 新手-->
                     <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff1e90ff" FontSize="15" TextAlignment="Center" Text="我是新手不会玩" MouseDown="ui_form_start_new_player"/>
 
@@ -358,9 +358,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition x:Name="ui_form_nmo_form_mod_bml_can_install" Width="auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions >
@@ -372,7 +370,6 @@
                                     <TextBlock x:Name="ui_form_nmo_form_mod_bml_describe" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" Text="当前Ballance Mod Loader安装状态："/>
 
                                     <Button x:Name="ui_form_nmo_form_mod_bml_install" Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="3" Grid.Column="3" Content="安装Ballance Mod Loader" Width="200" Height="30"/>
-                                    <Button x:Name="ui_form_nmo_form_mod_bml_uninstall" Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.RowSpan="3" Grid.Column="5" Content="卸载Ballance Mod Loader" Width="200" Height="30"/>
 
                                 </Grid>
 
@@ -491,30 +488,6 @@
                                     </ListBox>
 
                                 </Grid>
-
-                            </Grid>
-
-                        </TabItem>
-
-                        <TabItem Header="纪录证明" Style="{DynamicResource tab_temp_2}">
-
-                            <Grid Background="#00000000">
-                                <Grid.RowDefinitions >
-                                    <RowDefinition Height="10"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="10"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="10"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Foreground="White" FontSize="15" Grid.Row="1" Text="如果你破了纪录，需要开出你的纪录证明" TextAlignment="Center"/>
-                                <TextBlock Foreground="White" FontSize="15" Grid.Row="2" Text="这将检索你的Ballance的全部文件来证明你的纪录是合法的" TextAlignment="Center"/>
-
-                                <Button x:Name="ui_form_nmo_form_promise_open" Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="4" Width="200" Height="30" Content="立即开出证明"/>
-
-                                <TextBox Foreground="White" FontSize="15" Grid.Row="6" Text="" Background="#00000000" BorderThickness="0" IsReadOnly="True"/>
 
                             </Grid>
 
@@ -1121,13 +1094,13 @@
                                     <Grid.ColumnDefinitions >
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto"/>
-                                        
+
                                         <ColumnDefinition Width="10"/>
                                         <ColumnDefinition Width="100"/>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="100"/>
                                         <ColumnDefinition Width="10"/>
-                                        
+
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
@@ -1289,6 +1262,48 @@
             </TabItem>
 
             <!-- -->
+            <TabItem Header="记录证明" Style="{DynamicResource tab_temp_1}">
+                <TabItem.BorderBrush>
+                    <ImageBrush ImageSource="photo\time.png"/>
+                </TabItem.BorderBrush>
+
+                <Grid Background="#00000000">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="1">
+                            <TextBlock Foreground="White" FontSize="15" Text="如果你想要破纪录，您就需要在破纪录的过程中加载记录证明模块"/>
+                            <TextBlock Foreground="White" FontSize="15" Text="这将启动一个检测程序你的Ballance的全部文件并且在游戏中实时监测数据"/>
+                            <TextBlock Foreground="White" FontSize="15" Text="借此来证明你的纪录是合法的"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Text="点击下面的按钮，你将进入破纪录的游戏模式，在结束游戏后，回到这里"/>
+                            <TextBlock Foreground="White" FontSize="15" Text="游戏中获取的数据和是否作弊将显示在下方"/>
+                        </StackPanel>
+
+                        <Button x:Name="ui_form_time_promise_open" Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Row="3" Width="200" Height="30" Content="立即破纪录"/>
+
+                        <TextBox Foreground="White" FontSize="15" Grid.Row="5" Text="" Background="#00000000" BorderThickness="0" IsReadOnly="True"/>
+
+                    </Grid>
+
+                </Grid>
+
+            </TabItem>
+
+            <!-- -->
             <TabItem Header="联机对战" Style="{DynamicResource tab_temp_1}">
                 <TabItem.BorderBrush>
                     <ImageBrush ImageSource="photo\web.png"/>
@@ -1301,7 +1316,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TabControl x:Name="tabControl_7" Background="#00000000" BorderThickness="0" Grid.Column="1">
-                                               
+
                         <TabItem Header="连接服务器" IsSelected="true" Style="{DynamicResource tab_temp_2}">
 
                             <Grid Background="#00000000">
@@ -1319,13 +1334,13 @@
 
                                 <Expander Grid.Row="3" Header="IP与端口信息" Foreground="White" FontSize="15">
                                     <StackPanel Grid.Row="1">
-                                        <TextBlock Foreground="White" FontSize="15" Text="本机IP地址：0.0.0.0"/>
-                                    <TextBlock Foreground="White" FontSize="15" Text="本机端口：0000"/>
-                                    <TextBlock Foreground="White" FontSize="15" Text="服务器IP地址：0.0.0.0"/>
-                                    <TextBlock Foreground="White" FontSize="15" Text="服务器端口：0000"/>
-                                </StackPanel>
+                                        <TextBlock x:Name="ui_form_web_form_local_ip" Foreground="White" FontSize="15" Text="本机IP地址：0.0.0.0"/>
+                                        <TextBlock x:Name="ui_form_web_form_local_port" Foreground="White" FontSize="15" Text="本机端口：0000"/>
+                                        <TextBlock x:Name="ui_form_web_form_service_ip" Foreground="White" FontSize="15" Text="服务器IP地址：0.0.0.0"/>
+                                        <TextBlock x:Name="ui_form_web_form_service_port" Foreground="White" FontSize="15" Text="服务器端口：0000"/>
+                                    </StackPanel>
                                 </Expander>
-                                                              
+
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions >
                                         <ColumnDefinition Width="*"/>
@@ -1336,11 +1351,11 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    
+
                                     <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Column="1" Content="创建服务器" Width="200" Height="30"/>
                                     <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Column="3" Content="加入服务器" Width="200" Height="30"/>
                                     <Button Foreground="White" Background="#8f1e90ff" FontSize="15" Grid.Column="5" Content="离开/解散服务器" Width="200" Height="30"/>
-                                    
+
                                 </Grid>
 
                                 <TextBlock Grid.Row="5" Foreground="White" FontSize="15" Text="当前服务器人员列表："/>
@@ -1380,7 +1395,7 @@
                         </TabItem>
 
                     </TabControl>
-                    
+
                 </Grid>
             </TabItem>
 
@@ -1393,14 +1408,6 @@
                     <Grid.RowDefinitions >
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions >
@@ -1409,20 +1416,32 @@
                         <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="百度Ballance吧保留所有权利 (C) 2012-2016"/>
+                    <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
 
-                    <TextBlock Grid.Row="3" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="Ballance工具箱"/>
-                    <TextBlock Grid.Row="4" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools.exe   语言：Vb.net   Ballance工具箱主程序   Version 3.0.0.0"/>
-                    <TextBlock Grid.Row="5" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="ScoreManager.dll   语言：C#   Ballance工具箱连接ScoreManager库   Version 1.0.0.0"/>
-                    <TextBlock Grid.Row="6" Grid.Column="1" Foreground="White" FontSize="15" TextAlignment="Center" Text="ICSharpCode.SharpZipLib.dll   语言：C#   压缩文件压缩/解压缩库   Version 0.86.0.518"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="百度Ballance吧保留所有权利 (C) 2012-2016"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="Ballance工具箱"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text=""/>
+                        
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools.exe   语言：Vb.net   Ballance工具箱主程序   Version 4.0.0.0"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_deploy.exe   语言：Vb.net   Ballance工具箱部署器   Version 1.0.0.0"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_monitor.exe   语言：Vb.net   Ballance记录检测器   Version 1.0.0.0"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_web.exe   语言：Vb.net   Ballance联机对战   Version 1.0.0.0"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_web_service.exe   语言：Vb.net   Ballance联机对战服务器端   Version 1.0.0.0"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_hook.dll   语言：Vb.net   键盘钩子库   Version 1.0.0.0"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ScoreManager.dll   语言：C#   Ballance工具箱连接ScoreManager库   Version 1.0.0.0"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ICSharpCode.SharpZipLib.dll   语言：C#   压缩文件压缩/解压缩库   Version 0.86.0.518"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text=""/>
+            
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Foreground="White" FontSize="15" Text="跟随我们："/>
+                            <TextBlock TextDecorations="Underline" Foreground="#ff1e90ff" FontSize="15" Text="http://tieba.baidu.com/f?kw=ballance" MouseDown="ui_form_about_follow"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Foreground="White" FontSize="15" Text="开源地址（Github）："/>
+                            <TextBlock TextDecorations="Underline" Foreground="#ff1e90ff" FontSize="15" Text="https://github.com/yyc12345/ballance_tools" MouseDown="ui_form_about_open"/>
+                        </StackPanel>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text=""/>
 
-                    <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="跟随我们："/>
-                        <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff1e90ff" FontSize="15" Text="http://tieba.baidu.com/f?kw=ballance" MouseDown="ui_form_about_follow"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Grid.Row="8" Grid.Column="1" Foreground="White" FontSize="15" Text="开源地址（Github）："/>
-                        <TextBlock Grid.Row="8" TextDecorations="Underline"  Grid.Column="1" Foreground="#ff1e90ff" FontSize="15" Text="https://github.com/yyc12345/ballance_tools" MouseDown="ui_form_about_open"/>
                     </StackPanel>
 
 

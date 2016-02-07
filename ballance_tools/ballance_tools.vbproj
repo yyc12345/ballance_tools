@@ -215,5 +215,8 @@
   <ItemGroup>
     <Resource Include="photo\web.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="photo\time.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

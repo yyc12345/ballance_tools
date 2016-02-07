@@ -71,6 +71,7 @@ Class MainWindow
                     app_init_bgm(Nothing, False)
                     app_init_mod(Nothing, False)
                     app_init_ph(Nothing, False)
+                    app_init_web(Nothing, False)
 
                     app_init_user_contorl(Nothing, False)
 
@@ -119,6 +120,9 @@ Class MainWindow
                 run_log.WriteLine("")
                 run_log.WriteLine("---app_init_ph 加载模型(ph)---")
                 app_init_ph(run_log, True)
+                run_log.WriteLine("")
+                run_log.WriteLine("---app_init_web 初始化联网对战---")
+                app_init_web(run_log, True)
                 run_log.WriteLine("")
 
                 run_log.WriteLine("---app_init_user_contorl 初始化用户控件---")
@@ -296,7 +300,7 @@ Class MainWindow
             ui_form_setting_form_1_fullscreen.Text = "当前全屏状态：全屏"
             ui_form_setting_form_1_fullscreen_btn.Content = "修改为 窗口化"
             ui_form_setting_form_1_language.Text = "当前语言状态：英语（English）"
-            '由于游戏分辨率不影响开游戏，所以这里由于重写注册表无需写，这里就显示800x600
+            '由于游戏分辨率影响开游戏，所以重写注册表，这里就显示800x600
             ui_form_setting_form_1_size_width.Text = "800"
             ui_form_setting_form_1_size_height.Text = "600"
 
@@ -313,40 +317,6 @@ Class MainWindow
                 End If
 
                 b_full_screen_3 = Key.OpenSubKey("SOFTWARE\Wow6432Node\ballance\Settings", True)
-                b_full_screen_3.SetValue("Fullscreen", "1", RegistryValueKind.DWord)
-
-                If use_debug_log = True Then
-                    debug_log.WriteLine("已写入Fullscreen")
-                End If
-
-                '地址恢复
-                If ballance_start_path <> "" Then
-                    b_full_screen_3.SetValue("TargetDir", Mid(ballance_start_path, 1, ballance_start_path.Length - 1), RegistryValueKind.String)
-
-                    If use_debug_log = True Then
-                        debug_log.WriteLine("已重写TargetDir")
-                    End If
-                Else
-                    '没有读到，在待会实现
-
-                    If use_debug_log = True Then
-                        debug_log.WriteLine("没有找到TargetDir，所以待会再重写")
-                    End If
-                End If
-
-
-                b_full_screen_3.SetValue("Language", "1", RegistryValueKind.DWord)
-
-                If use_debug_log = True Then
-                    debug_log.WriteLine("已重写Language")
-                End If
-
-                '恢复启动SetupCommand
-                b_full_screen_3.SetValue("SetupCommand", "", RegistryValueKind.String)
-
-                If use_debug_log = True Then
-                    debug_log.WriteLine("已重写SetupCommand")
-                End If
 
             Else
                 '32位
@@ -358,42 +328,55 @@ Class MainWindow
                 End If
 
                 b_full_screen_3 = Key.OpenSubKey("SOFTWARE\ballance\Settings", True)
-                b_full_screen_3.SetValue("Fullscreen", "1", RegistryValueKind.DWord)
 
-                If use_debug_log = True Then
-                    debug_log.WriteLine("已写入Fullscreen")
-                End If
-
-                '地址恢复
-                If ballance_start_path <> "" Then
-                    b_full_screen_3.SetValue("TargetDir", Mid(ballance_start_path, 1, ballance_start_path.Length - 1), RegistryValueKind.String)
-
-                    If use_debug_log = True Then
-                        debug_log.WriteLine("已重写TargetDir")
-                    End If
-                Else
-                    '没有读到，在待会实现
-
-                    If use_debug_log = True Then
-                        debug_log.WriteLine("没有找到TargetDir，所以待会再重写")
-                    End If
-                End If
-
-
-                b_full_screen_3.SetValue("Language", "1", RegistryValueKind.DWord)
-
-                If use_debug_log = True Then
-                    debug_log.WriteLine("已重写Language")
-                End If
-
-                '恢复启动SetupCommand
-                b_full_screen_3.SetValue("SetupCommand", "", RegistryValueKind.String)
-
-                If use_debug_log = True Then
-                    debug_log.WriteLine("已重写SetupCommand")
-                End If
 
             End If
+            '*****************************************************写入注册表
+
+            b_full_screen_3.SetValue("Fullscreen", "1", RegistryValueKind.DWord)
+
+            If use_debug_log = True Then
+                debug_log.WriteLine("已写入Fullscreen")
+            End If
+
+            '地址恢复
+            If ballance_start_path <> "" Then
+                b_full_screen_3.SetValue("TargetDir", Mid(ballance_start_path, 1, ballance_start_path.Length - 1), RegistryValueKind.String)
+
+                If use_debug_log = True Then
+                    debug_log.WriteLine("已重写TargetDir")
+                End If
+            Else
+                '没有读到，在待会实现
+
+                If use_debug_log = True Then
+                    debug_log.WriteLine("没有找到TargetDir，所以待会再重写")
+                End If
+            End If
+
+
+            b_full_screen_3.SetValue("Language", "1", RegistryValueKind.DWord)
+
+            If use_debug_log = True Then
+                debug_log.WriteLine("已重写Language")
+            End If
+
+            '恢复启动SetupCommand
+            b_full_screen_3.SetValue("SetupCommand", "", RegistryValueKind.String)
+
+            If use_debug_log = True Then
+                debug_log.WriteLine("已重写SetupCommand")
+            End If
+
+            '重写分辨率
+            Dim linshi_1 As String = 800.ToString("X4") & 600.ToString("X4")
+            Dim linshi_2 As String = Long.Parse(linshi_1, System.Globalization.NumberStyles.HexNumber)
+            b_full_screen_3.SetValue("VideoMode", linshi_2, RegistryValueKind.DWord)
+
+            If use_debug_log = True Then
+                debug_log.WriteLine("已重写VideoMode")
+            End If
+
 
         End Try
 
@@ -1363,10 +1346,13 @@ Class MainWindow
             '设置bml
             ui_form_nmo_form_mod_bml_describe.Text = "当前Ballance Mod Loader安装状态：已安装"
             BML_have = True
+            '封掉bml安装按钮
+            ui_form_nmo_form_mod_bml_can_install.Width = New GridLength(0)
 
             If use_debug_log = True Then
                 debug_log.WriteLine("已设置bml")
             End If
+
         Else
             '没有bml
             If use_debug_log = True Then
@@ -1568,6 +1554,25 @@ Class MainWindow
         End If
 
         file_wr.Dispose()
+
+    End Sub
+
+    ''' <summary>
+    ''' 初始化联网对战内容
+    ''' </summary>
+    ''' <param name="debug_log">要使用的debug文件写入变量</param>
+    ''' <param name="use_debug_log">是否使用debug_log</param>
+    Public Sub app_init_web(ByRef debug_log As System.IO.StreamWriter, ByVal use_debug_log As Boolean)
+
+        '获取本机ip
+        Dim ipaddress As System.Net.IPAddress
+        Dim local_name = System.Net.Dns.GetHostName
+        ipaddress = System.Net.Dns.GetHostByName(local_name).AddressList.GetValue(0)
+        ui_form_web_form_local_ip.Text = "本机IP地址：" & ipaddress.ToString
+
+        If use_debug_log = True Then
+            debug_log.WriteLine("已获取到IP地址" & ipaddress.ToString)
+        End If
 
     End Sub
 
@@ -2570,7 +2575,7 @@ Class MainWindow
         End If
     End Sub
 
-    'bml安装，卸载************************************************
+    'bml安装************************************************
     '安装
     Private Sub ui_form_nmo_form_mod_bml_install_run(sender As Object, e As RoutedEventArgs) Handles ui_form_nmo_form_mod_bml_install.Click
 
@@ -2579,6 +2584,9 @@ Class MainWindow
 
                 System.Diagnostics.Process.Start(Environment.CurrentDirectory & "\system_nmo\bml_install.exe")
 
+                '封掉bml安装按钮
+                ui_form_nmo_form_mod_bml_can_install.Width = New GridLength(0)
+
             Else
                 MsgBox("无可用的BML安装源，需要从Ballance工具箱部署器部署有关安装源才能执行安装", 16, "Ballance工具箱")
             End If
@@ -2586,22 +2594,6 @@ Class MainWindow
 
     End Sub
 
-    '卸载
-    Private Sub ui_form_nmo_form_mod_bml_uninstall_run(sender As Object, e As RoutedEventArgs) Handles ui_form_nmo_form_mod_bml_uninstall.Click
-
-        'TODO:未来可以卸载bml
-        'System.Diagnostics.Process.Start(ballance_start_path & "Uninstall.exe")
-        MsgBox("暂无该功能，该功能未开发完毕", 16, "Ballance工具箱")
-
-    End Sub
-
-    '记录证明************************************************
-    Private Sub ui_form_nmo_form_promise_open_run(sender As Object, e As RoutedEventArgs) Handles ui_form_nmo_form_promise_open.Click
-
-        'TODO:未来可以记录证明
-        MsgBox("暂无该功能，该功能未开发完毕", 16, "Ballance工具箱")
-
-    End Sub
 
 #End Region
 

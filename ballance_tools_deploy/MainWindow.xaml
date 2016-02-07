@@ -241,10 +241,11 @@
                     
                     <!-- foreword-->
                     <TabItem Header="概述" IsSelected="True">
-                        <TextBlock Text="本模块是为 Ballance工具箱 做资源打包之用，打包资源，就是把本地的属于你自己的Ballance个性化&#x000A;
-内容打包进一个压缩包里，随后发布给其他人，让你给他们也能够有更好的游戏体验；内容包括：音效、&#x000A;
-BGM、材质、背景这4项。打包可选择Zip格式或 Ballance工具箱 格式，实质上两者的文件完全相同，只是&#x000A;
-改变了后缀名。" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="本模块是为 Ballance工具箱 做资源打包之用，打包资源，就是把本地的属于你自己的&#x000A;
+Ballance个性化内容打包进一个压缩包里，随后发布给其他人，让你给他们也能够有更好的&#x000A;
+游戏体验；内容包括：音效、BGM、材质、背景、Mod、模型这6项。&#x000A;
+打包可选择Zip格式或 Ballance工具箱 格式，实质上两者的文件完全相同，只是改变了后缀名。&#x000A;
+                                   " Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </TabItem>
 
                     <!-- material-->
