@@ -20,7 +20,7 @@
     ''' <param name="e"></param>
     Private Sub ui_link_about(sender As Object, e As MouseButtonEventArgs)
 
-        System.Diagnostics.Process.Start("http://baike.baidu.com/link?url=pa1YyqCJx0ufwthGzcdmSsAiNWP3I3SFZZoDJvhfedxVrek3JQFtfaSrpxxpertga51Ty_Ib4algXnmiMAWGx")
+        System.Diagnostics.Process.Start("http://baike.baidu.com/link?url=QdfXT_1I4OogDnPcK6tGPgdrM1bz5LXOH7nDSht-yiUzyTMux8KTWwk7zFHgU23ztaDV_tdhTHGdIoZ0x0_uT_")
 
     End Sub
 End Class
