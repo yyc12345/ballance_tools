@@ -40,7 +40,7 @@
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
                         <TextBlock Foreground="White" FontSize="15" Text="什么是Ballance："/>
                         <TextBlock TextDecorations="Underline" Foreground="#ff1e90ff" FontSize="15" 
-                               Text="http://baike.baidu.com/......" MouseDown="ui_link_about"/>
+                               Text="http://baike.baidu.com/view/68114.htm" MouseDown="ui_link_about"/>
                     </StackPanel>
 
                 </Grid>
