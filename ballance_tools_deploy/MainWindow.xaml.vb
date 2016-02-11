@@ -356,17 +356,17 @@ Class MainWindow
 
                 Select Case a
                     Case 1
-                        ui_pack_material_text.Text = open_packups_file.FileName
+                        ui_pack_material_text.Text = save_packups_file.FileName
                     Case 2
-                        ui_pack_background_text.Text = open_packups_file.FileName
+                        ui_pack_background_text.Text = save_packups_file.FileName
                     Case 3
-                        ui_pack_bgm_text.Text = open_packups_file.FileName
+                        ui_pack_bgm_text.Text = save_packups_file.FileName
                     Case 4
-                        ui_pack_wave_text.Text = open_packups_file.FileName
+                        ui_pack_wave_text.Text = save_packups_file.FileName
                     Case 5
-                        ui_pack_mod_text.Text = open_packups_file.FileName
+                        ui_pack_mod_text.Text = save_packups_file.FileName
                     Case 6
-                        ui_pack_ph_text.Text = open_packups_file.FileName
+                        ui_pack_ph_text.Text = save_packups_file.FileName
                 End Select
 
 
