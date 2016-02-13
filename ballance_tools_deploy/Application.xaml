@@ -6,7 +6,7 @@
     <Application.Resources>
 
         <!-- tab的模板-->
-        <Style TargetType="{x:Type TabItem}">
+        <Style TargetType="{x:Type TabItem}" x:Key="ui_temp_normal_tabitem">
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -26,6 +26,48 @@
                             </TextBlock>
 
                             <Grid Grid.Row="2" Background="{TemplateBinding Background}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers >
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#ffffffff"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="False">
+                    <Setter Property="Background" Value="#00000000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TabItem}" x:Key="ui_temp_have_photo_tabitem">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid Background="#00000000" Width="100" Height="37">
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="2"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" Grid.Column="0"  Background="{TemplateBinding BorderBrush}"/>
+
+                            <TextBlock Grid.Column="1" Foreground="White" FontSize="15" Text="{TemplateBinding Header}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock.ToolTip >
+                                    <Grid >
+                                        <TextBlock Foreground="black" FontSize="15" Text="{TemplateBinding Header}"/>
+                                    </Grid>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+
+                            <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="{TemplateBinding Background}"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

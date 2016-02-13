@@ -21,12 +21,15 @@
 
         <TabControl x:Name="tab_contorl_main" Margin="30,30,30,30" Grid.Row="1" Grid.Column="1" Background="#00000000" BorderThickness="0">
 
-            <TabItem Header="部署" IsSelected="True">
+            <TabItem Header="部署" IsSelected="True" Style="{DynamicResource ui_temp_have_photo_tabitem}">
+                <TabItem.BorderBrush >
+                    <ImageBrush ImageSource="deploy.png"/>
+                </TabItem.BorderBrush>
 
                 <TabControl x:Name="tab_contorl" Margin="0,30,0,0" Grid.Row="1" Grid.Column="1" Background="#00000000" BorderThickness="0">
 
                     <!-- foreword-->
-                    <TabItem Header="概述" IsSelected="True">
+                    <TabItem Header="概述" IsSelected="True" Style="{DynamicResource ui_temp_normal_tabitem}">
                         <TextBlock Text="本程序是为 Ballance工具箱 做提前部署之用，提前部署，就是把一些需要耗费大量网络资源的&#x000A;
 内容让用户自行选择下载并使用该程序在使用Ballance工具箱之前部署这些内容。&#x000A;
 所以，建议是，一定要部署Cache，其余酌情部署。若不部署Cache，第一次启动工具箱会非常&#x000A;
@@ -34,7 +37,7 @@
                     </TabItem>
 
                     <!-- cache-->
-                    <TabItem Header="Cache">
+                    <TabItem Header="Cache" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -67,7 +70,7 @@
                     </TabItem>
 
                     <!-- material-->
-                    <TabItem Header="原版材质包">
+                    <TabItem Header="原版材质包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -100,7 +103,7 @@
                     </TabItem>
 
                     <!-- background-->
-                    <TabItem Header="原版背景包">
+                    <TabItem Header="原版背景包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -133,7 +136,7 @@
                     </TabItem>
 
                     <!-- wave-->
-                    <TabItem Header="原版音效包">
+                    <TabItem Header="原版音效包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -166,7 +169,7 @@
                     </TabItem>
 
                     <!-- bgm-->
-                    <TabItem Header="原版BGM包">
+                    <TabItem Header="原版BGM包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -199,7 +202,7 @@
                     </TabItem>
 
                     <!-- bml-->
-                    <TabItem Header="BML安装源">
+                    <TabItem Header="BML安装源" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -235,12 +238,15 @@
                 
             </TabItem>
 
-            <TabItem Header="资源打包">
+            <TabItem Header="资源打包" Style="{DynamicResource ui_temp_have_photo_tabitem}">
+                <TabItem.BorderBrush >
+                    <ImageBrush ImageSource="packups.png"/>
+                </TabItem.BorderBrush>
 
                 <TabControl x:Name="tab_contorl_pack" Margin="0,30,0,0" Background="#00000000" BorderThickness="0">
                     
                     <!-- foreword-->
-                    <TabItem Header="概述" IsSelected="True">
+                    <TabItem Header="概述" IsSelected="True" Style="{DynamicResource ui_temp_normal_tabitem}">
                         <TextBlock Text="本模块是为 Ballance工具箱 做资源打包之用，打包资源，就是把本地的属于你自己的&#x000A;
 Ballance个性化内容打包进一个压缩包里，随后发布给其他人，让你给他们也能够有更好的&#x000A;
 游戏体验；内容包括：音效、BGM、材质、背景、Mod、模型这6项。&#x000A;
@@ -249,7 +255,7 @@ Ballance个性化内容打包进一个压缩包里，随后发布给其他人，
                     </TabItem>
 
                     <!-- material-->
-                    <TabItem Header="材质包">
+                    <TabItem Header="材质包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -284,7 +290,7 @@ Ballance个性化内容打包进一个压缩包里，随后发布给其他人，
                     </TabItem>
 
                     <!-- Background-->
-                    <TabItem Header="背景包">
+                    <TabItem Header="背景包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -326,7 +332,7 @@ Ballance个性化内容打包进一个压缩包里，随后发布给其他人，
                     </TabItem>
 
                     <!-- BGM-->
-                    <TabItem Header="BGM包">
+                    <TabItem Header="BGM包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -361,7 +367,7 @@ Ballance个性化内容打包进一个压缩包里，随后发布给其他人，
                     </TabItem>
 
                     <!-- material-->
-                    <TabItem Header="音效包">
+                    <TabItem Header="音效包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -396,7 +402,7 @@ Ballance个性化内容打包进一个压缩包里，随后发布给其他人，
                     </TabItem>
                     
                     <!-- mod-->
-                    <TabItem Header="Mod包">
+                    <TabItem Header="Mod包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >
@@ -432,7 +438,7 @@ Ballance个性化内容打包进一个压缩包里，随后发布给其他人，
                     </TabItem>
 
                     <!-- mod-->
-                    <TabItem Header="模型包">
+                    <TabItem Header="模型包" Style="{DynamicResource ui_temp_normal_tabitem}">
 
                         <Grid>
                             <Grid.RowDefinitions >

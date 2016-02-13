@@ -160,6 +160,8 @@ Class MainWindow
 
         linshi.Close()
 
+        '测试调试区域
+
 
     End Sub
 
@@ -574,6 +576,12 @@ Class MainWindow
             debug_log.WriteLine("已获取已存在的下载过的地图文件名，共：" & have_map_list.Count & "个")
         End If
 
+        '*******************************************已下载地图文件读取区*******************************************
+        '已下载地图文件的写入
+        Dim file_wr As New System.IO.StreamWriter(Environment.CurrentDirectory & "\cache_map.dat", True, System.Text.Encoding.UTF8)
+        If use_debug_log = True Then
+            debug_log.WriteLine("已下载地图文件列表已读取")
+        End If
 
 
         If use_debug_log = True Then
@@ -583,33 +591,46 @@ Class MainWindow
         '获取地图列表
         Dim OnLineMap = New List(Of ScoreManager.Data.Map)
 
-        If My.Computer.Network.IsAvailable = True Then
+        'sm是否获取错误
+        Dim sm_error_state As Boolean = False
 
-            If use_debug_log = True Then
-                debug_log.WriteLine("网络有效，准备获取sm地图列表资源")
+        '尝试获取
+        Try
+
+            If My.Computer.Network.IsAvailable = True Then
+
+                If use_debug_log = True Then
+                    debug_log.WriteLine("网络有效，准备获取sm地图列表资源")
+                End If
+
+                Dim c As System.Net.WebClient = New System.Net.WebClient
+                c.Headers.Add("Referer", "http://jxtoolbox.sinaapp.com/api/map_json.php")
+                Dim reader = New System.IO.StreamReader(c.OpenRead("http://jxtoolbox.sinaapp.com/api/map_json.php"),
+                                                    System.Text.Encoding.UTF8)
+                Dim text As String = reader.ReadToEnd
+
+                OnLineMap = ScoreManager.IO.Deserialize(Of ScoreManager.Data.Map).JsonDeserializeListData(text)
+
+                If use_debug_log = True Then
+                    debug_log.WriteLine("已从sm获取到地图列表资源")
+                End If
             End If
 
-            Dim c As System.Net.WebClient = New System.Net.WebClient
-            c.Headers.Add("Referer", "http://jxtoolbox.sinaapp.com/api/map_json.php")
-            Dim reader = New System.IO.StreamReader(c.OpenRead("http://jxtoolbox.sinaapp.com/api/map_json.php"),
-                                                System.Text.Encoding.UTF8)
-            Dim text As String = reader.ReadToEnd
+        Catch ex As Exception
 
-            OnLineMap = ScoreManager.IO.Deserialize(Of ScoreManager.Data.Map).JsonDeserializeListData(text)
-
+            '获取失败
             If use_debug_log = True Then
-                debug_log.WriteLine("已从sm获取到地图列表资源")
+                debug_log.WriteLine("sm资源获取失败，原因" & ex.Message & vbCrLf & "不影响正常运行，继续运行，忽略sm资源")
             End If
-        End If
+
+            '直接跳过获取
+            sm_error_state = True
+            GoTo sm_error
+
+        End Try
+
 
         '**************************************************************************************
-
-        '已下载地图文件的写入
-        Dim file_wr As New System.IO.StreamWriter(Environment.CurrentDirectory & "\cache_map.dat", True, System.Text.Encoding.UTF8)
-        If use_debug_log = True Then
-            debug_log.WriteLine("准备开始下载地图图片")
-        End If
-
 
 
         If use_debug_log = True Then
@@ -620,7 +641,18 @@ Class MainWindow
         For a = 0 To OnLineMap.Count - 1
             '是否是下载过的文件
             If use_debug_log = True Then
-                debug_log.WriteLine("对 " & OnLineMap.Item(a).Title & " 执行下载图片")
+                debug_log.WriteLine("对 " & OnLineMap.Item(a).Title & " 预备执行下载图片")
+            End If
+
+            '========检测是否存在该地图文件，没有存在就不下载
+            If System.IO.File.Exists(Environment.CurrentDirectory & "\map\" & OnLineMap.Item(a).Title & ".nmo") = True Then
+                '存在，下载图片，不做操作，等待退出if
+            Else
+                '不需要下载图片，跳出这个循环
+                If use_debug_log = True Then
+                    debug_log.WriteLine("未检测到该地图在已安装的地图列表中，无需下载")
+                End If
+                GoTo jump_to_next_for
             End If
 
             If have_map_list.Contains(OnLineMap.Item(a).Title) = False Then
@@ -658,9 +690,17 @@ Class MainWindow
                 End If
             End If
 
+            '======跳转到下一个循环的标签
+jump_to_next_for:
+
         Next
 
         '**************************************************************************************
+
+
+        '=======sm资源无法获取时，跳转到的位置标签
+sm_error:
+
 
         Dim aaa As New ui_depend_form_level_form_level_list
 
@@ -753,7 +793,6 @@ Class MainWindow
         file_wr.Dispose()
 
 
-
         If use_debug_log = True Then
             debug_log.WriteLine("****************************索引文件列表，添加md5")
         End If
@@ -828,41 +867,46 @@ Class MainWindow
                 Dim yes As Boolean = False
 
                 '*****************************************检测sm里面是否有资源
-                If OnLineMap.Count <> 0 Then
-                    For b = 0 To OnLineMap.Count - 1
-                        If OnLineMap.Item(b).Title = bbb.pro_title Then
-                            '有相同的
+                '检测sm资源获取是否出过错，出错就不允许访问sm资源
+                If sm_error_state = False Then
+                    '正规访问函数部分
+                    If OnLineMap.Count <> 0 Then
+                        For b = 0 To OnLineMap.Count - 1
+                            If OnLineMap.Item(b).Title = bbb.pro_title Then
+                                '有相同的
 
-                            bbb.pro_id = OnLineMap.Item(b).ID
-                            bbb.pro_creator = "制作者：" & OnLineMap.Item(b).Creator
-                            bbb.pro_description = "描述：" & OnLineMap.Item(b).Description
-                            bbb.pro_difficulty = "难度：" & OnLineMap.Item(b).Difficulty
-                            bbb.pro_downloadcount = "下载次数：" & OnLineMap.Item(b).DownloadCount
-                            bbb.pro_playcount = "玩的次数：" & OnLineMap.Item(b).PlayCount
-                            bbb.pro_stars = "星级："
-                            If OnLineMap.Item(b).Stars <> 0 Then
-                                For c = 0 To OnLineMap.Item(b).Stars - 1
-                                    bbb.pro_stars = bbb.pro_stars & "★"
-                                Next
+                                bbb.pro_id = OnLineMap.Item(b).ID
+                                bbb.pro_creator = "制作者：" & OnLineMap.Item(b).Creator
+                                bbb.pro_description = "描述：" & OnLineMap.Item(b).Description
+                                bbb.pro_difficulty = "难度：" & OnLineMap.Item(b).Difficulty
+                                bbb.pro_downloadcount = "下载次数：" & OnLineMap.Item(b).DownloadCount
+                                bbb.pro_playcount = "玩的次数：" & OnLineMap.Item(b).PlayCount
+                                bbb.pro_stars = "星级："
+                                If OnLineMap.Item(b).Stars <> 0 Then
+                                    For c = 0 To OnLineMap.Item(b).Stars - 1
+                                        bbb.pro_stars = bbb.pro_stars & "★"
+                                    Next
+                                End If
+
+                                If System.IO.File.Exists(Environment.CurrentDirectory & "\cache\map\" & bbb.pro_title & ".jpg") = True Then
+                                    bbb.pro_image = New ImageBrush(New BitmapImage(New Uri(Environment.CurrentDirectory & "\cache\map\" & bbb.pro_title & ".jpg")))
+                                Else
+                                    '没有，默认背景
+                                    bbb.pro_image = New ImageBrush(New BitmapImage(New Uri(Environment.CurrentDirectory & "\cache\nothing.jpg")))
+                                End If
+
+                                If use_debug_log = True Then
+                                    debug_log.WriteLine("使用sm资源")
+                                End If
+
+                                yes = True
+                                Exit For
+
                             End If
-
-                            If System.IO.File.Exists(Environment.CurrentDirectory & "\cache\map\" & bbb.pro_title & ".jpg") = True Then
-                                bbb.pro_image = New ImageBrush(New BitmapImage(New Uri(Environment.CurrentDirectory & "\cache\map\" & bbb.pro_title & ".jpg")))
-                            Else
-                                '没有，默认背景
-                                bbb.pro_image = New ImageBrush(New BitmapImage(New Uri(Environment.CurrentDirectory & "\cache\nothing.jpg")))
-                            End If
-
-                            If use_debug_log = True Then
-                                debug_log.WriteLine("使用sm资源")
-                            End If
-
-                            yes = True
-                            Exit For
-
-                        End If
-                    Next
+                        Next
+                    End If
                 End If
+
 
                 '************************************是否需要使用本地资源
                 If yes = False Then

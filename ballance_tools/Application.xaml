@@ -6,6 +6,11 @@
     <Application.Resources>
 
         <!-- ************************************************************************************************-->
+        <!-- 各个系统的颜色背景-->
+        <SolidColorBrush x:Key="ui_temp_windows10_item_bk" Color="#5f6495ed"/>
+        <SolidColorBrush x:Key="ui_temp_windows7_item_bk" Color="#7fffffff"/>
+
+        <!-- ************************************************************************************************-->
         <Style TargetType="{x:Type TabItem}" x:Key="tab_temp_1">
             <Setter Property="Template">
                 <Setter.Value>
@@ -108,7 +113,7 @@
         <!-- ************************************************************************************************-->
         <!-- 关卡-检测列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_level_form_check_list">
-            <Grid Height="50" Background="#5f6495ed">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -129,7 +134,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_level_form_check_list">
-            <Grid Height="50" Background="white">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions >
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -151,7 +156,7 @@
         </DataTemplate>
         <!-- 关卡-地图列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_level_form_level_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -244,7 +249,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_level_form_level_list">
-            <Grid Height="auto" Background="white">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -338,7 +343,7 @@
         </DataTemplate>
         <!-- 关卡-英雄榜列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_level_form_hero_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -389,7 +394,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_level_form_hero_list">
-            <Grid Height="80" Background="white">
+            <Grid Height="80" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -443,7 +448,7 @@
         <!-- ************************************************************************************************-->
         <!-- nmo-mod包列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_nmo_form_mod_mod_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -518,7 +523,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_nmo_form_mod_mod_list">
-            <Grid Height="auto" Background="white">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -595,7 +600,7 @@
 
         <!-- nmo-模组包列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_nmo_form_mod_ph_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -670,7 +675,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_nmo_form_mod_ph_list">
-            <Grid Height="auto" Background="white">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -748,7 +753,7 @@
         <!-- ************************************************************************************************-->
         <!-- 图片-材质包列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_photo_form_material_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -776,7 +781,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_photo_form_material_list">
-            <Grid Height="auto" Background="white">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -806,7 +811,7 @@
 
         <!-- 图片-背景包列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_photo_form_background_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -834,7 +839,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_photo_form_background_list">
-            <Grid Height="auto" Background="white">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -865,7 +870,7 @@
         <!-- ************************************************************************************************-->
         <!-- 音乐-音效包列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_wave_form_wave_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -893,7 +898,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_wave_form_wave_list">
-            <Grid Height="auto" Background="white">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -923,7 +928,7 @@
 
         <!-- 音乐-bgm包列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_wave_form_bgm_list">
-            <Grid Height="auto" Background="#5f6495ed">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -951,7 +956,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_wave_form_bgm_list">
-            <Grid Height="auto" Background="white">
+            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -983,7 +988,7 @@
 
         <!-- 设置-检测本地排行榜的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_setting_form_local_hero_list">
-            <Grid Height="50" Background="#5f6495ed">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -1003,7 +1008,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_setting_form_local_hero_list">
-            <Grid Height="50" Background="white">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -1027,7 +1032,7 @@
 
         <!-- 设置-本地排行榜备份列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_setting_form_local_hero_backups_list">
-            <Grid Height="50" Background="#5f6495ed">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -1043,7 +1048,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_setting_form_local_hero_backups_list">
-            <Grid Height="50" Background="white">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -1063,7 +1068,7 @@
 
         <!-- 联机对战-加入服务器人员列表的模板-->
         <DataTemplate x:Key="ui_temp_windows10_form_web_form_people_list">
-            <Grid Height="50" Background="#5f6495ed">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -1089,7 +1094,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_form_web_form_people_list">
-            <Grid Height="50" Background="white">
+            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -1119,7 +1124,7 @@
 
         <!-- 窗口-选择项目的模板-->
         <DataTemplate x:Key="ui_temp_windows10_window_select_item_list">
-            <Grid Height="80" Background="#5f6495ed">
+            <Grid Height="80" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
@@ -1152,7 +1157,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ui_temp_windows7_window_select_item_list">
-            <Grid Height="80" Background="White" >
+            <Grid Height="80" Background="{DynamicResource ui_temp_windows7_item_bk}" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
