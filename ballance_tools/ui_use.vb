@@ -110,14 +110,6 @@ Module ui_use
 
 #End Region
 
-    ''' <summary>
-    ''' 窗口-选择项列表集合
-    ''' </summary>
-    Public ui_connect_window_select_item_list As New List(Of ui_depend_window_select_item_list)
-    ''' <summary>
-    ''' 窗口-选择项，选择的项序号
-    ''' </summary>
-    Public ui_connect_window_select_item_list_select_index As Integer = 0
 
     ''' <summary>
     ''' 检测地图文件名

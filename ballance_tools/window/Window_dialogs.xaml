@@ -1,0 +1,63 @@
+﻿<Window x:Class="Window_dialogs" x:Name="window_dialogs_name"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ballance_tools"
+        mc:Ignorable="d" WindowStyle="None" 
+        AllowsTransparency="True" Title="" Height="350" Width="350" Loaded="window_open" BorderThickness="10" Icon="/ballance_tools;component/icon.ico">
+
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="10" Color="#FF858484" Direction="0" ShadowDepth="0" />
+    </Window.Effect>
+
+    <Grid>
+
+        <!-- 背景-->
+        <Grid Margin="0,0,0,0" Height="65" VerticalAlignment="Top">
+            <Grid.Background>
+                <SolidColorBrush x:Name="ui_title_bk" Color="#ff1e90ff"/>
+            </Grid.Background>
+        </Grid>
+
+        <!-- 文本-->
+        <Grid Margin="20,20,20,100" MouseDown="window_move">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="ui_title" Foreground="Black" Text="" Grid.Row="0" FontSize="20"/>
+
+            <ScrollViewer Grid.Row="2">
+                <TextBlock x:Name="ui_message" Foreground="#ff7f7f7f" Text="" TextWrapping="Wrap" FontSize="15"/>
+            </ScrollViewer>
+
+        </Grid>
+
+        <!-- 按钮-->
+        <Grid Margin="20,0,20,20" Height="80" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition x:Name="ui_btn_width_1" Width="5"/>
+                <ColumnDefinition x:Name="ui_btn_width_2" Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions >
+                <RowDefinition x:Name="ui_btn_height_1" Height="10"/>
+                <RowDefinition x:Name="ui_btn_height_2" Height="20"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="ui_input_text" Foreground="black" Background="#00000000" FontSize="15" BorderThickness="0,0,0,1" BorderBrush="#ff7f7f7f" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" />
+
+            <Button x:Name="ui_left_btn" Grid.Column="1" Background="#ffffffff" BorderThickness="0" Grid.Row="3" Content="" Foreground="#ff1e90ff" FontSize="15" Template="{DynamicResource ButtonControlTemplate}"/>
+            <Button x:Name="ui_right_btn" Grid.Column="3" Background="#ffffffff" BorderThickness="0" Grid.Row="3" Content="" Foreground="#ff1e90ff" FontSize="15" Template="{DynamicResource ButtonControlTemplate}"/>
+
+        </Grid>
+
+    </Grid>
+</Window>

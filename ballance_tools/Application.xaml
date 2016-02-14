@@ -10,6 +10,30 @@
         <SolidColorBrush x:Key="ui_temp_windows10_item_bk" Color="#5f6495ed"/>
         <SolidColorBrush x:Key="ui_temp_windows7_item_bk" Color="#7fffffff"/>
 
+        <!-- 重要===设定listbox item的选中色样式-->
+        <Style TargetType="ListBoxItem">
+            <Style.Resources>
+                <!--SelectedItem with focus-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue" Opacity=".4"/>
+                <!--SelectedItem without focus-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" Opacity=".4"/>
+            </Style.Resources>
+
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <!-- 设置触发器 -->
+            <!--<Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#efefef"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="true">
+                    <Setter Property="Background" Value="Coral"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>-->
+        </Style>
+
         <!-- ************************************************************************************************-->
         <Style TargetType="{x:Type TabItem}" x:Key="tab_temp_1">
             <Setter Property="Template">
@@ -87,22 +111,29 @@
         </Style>
 
         <ControlTemplate x:Key="ButtonControlTemplate" TargetType="{x:Type Button}">
-            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+            <Grid>
+                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"/>
+                
+                <Grid x:Name="face" Background="#ff000000" Opacity="0"/>
+                
                 <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                   
                 <!--<Border.Effect>
         <DropShadowEffect BlurRadius="10" Color="#FFffffff" ShadowDepth="0" />
     </Border.Effect>-->
-            </Border>
+            </Grid>
+
             <ControlTemplate.Triggers>
                 <Trigger Property="IsDefaulted" Value="True">
                     <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" TargetName="border" Value="#8F0070ff"/>
+                    <Setter Property="Opacity" TargetName="face" Value="0.1"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" TargetName="border" Value="#8F0050ff"/>
+                    <Setter Property="Opacity" TargetName="face" Value="0.2"/>
                 </Trigger>
+
             </ControlTemplate.Triggers>
         </ControlTemplate>
         <Style TargetType="{x:Type Button}">
@@ -112,7 +143,7 @@
 
         <!-- ************************************************************************************************-->
         <!-- 关卡-检测列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_level_form_check_list">
+        <DataTemplate x:Key="ui_temp_form_level_form_check_list">
             <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -133,29 +164,9 @@
 
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_level_form_check_list">
-            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions >
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Foreground="black" FontSize="15" Text="{Binding pro_level_name}" TextAlignment="Center"/>
-                <TextBlock Grid.Column="2" Grid.Row="1" Foreground="black" FontSize="15" Text="{Binding pro_level_path}" TextAlignment="Center"/>
-                <TextBlock Grid.Column="4" Grid.Row="1" Foreground="black" FontSize="15" Text="{Binding pro_map_name}" TextAlignment="Center"/>
-
-            </Grid>
-        </DataTemplate>
         <!-- 关卡-地图列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_level_form_level_list">
+        <DataTemplate x:Key="ui_temp_form_level_form_level_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -248,101 +259,9 @@
 
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_level_form_level_list">
-            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="0" Grid.RowSpan="15" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_image}" Stroke="white"/>
-                </Grid>
-
-                <TextBlock Grid.Column="3" Grid.Row="1" Foreground="Black" FontSize="20" Text="{Binding pro_title}"/>
-                <Expander Header="详细信息" Grid.Column="3" Grid.Row="3" Foreground="Black" FontSize="15">
-                    <Grid Background="#00000000">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="2" Grid.Row="1" Foreground="Black" FontSize="15" Text="{Binding pro_creator}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_creator}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="3" Foreground="Black" FontSize="15" Width="200" Text="{Binding pro_description}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_description}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="5" Foreground="Black" FontSize="15" Text="{Binding pro_difficulty}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_difficulty}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="7" Foreground="Black" FontSize="15" Text="{Binding pro_playcount}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_playcount}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="9" Foreground="Black" FontSize="15" Text="{Binding pro_stars}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_stars}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="11" Foreground="Black" FontSize="15" Text="{Binding pro_downloadcount}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_downloadcount}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                    </Grid>
-                </Expander>
-
-
-            </Grid>
-        </DataTemplate>
         <!-- 关卡-英雄榜列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_level_form_hero_list">
+        <DataTemplate x:Key="ui_temp_form_level_form_hero_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -393,61 +312,10 @@
                 </Grid>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_level_form_hero_list">
-            <Grid Height="80" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Row="0" Grid.RowSpan="15" Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="20"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_user_image}" Stroke="{Binding pro_background}" StrokeThickness="5"/>
-                </Grid>
-
-                <Grid Grid.Column="2" Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0" Foreground="black" FontSize="20" Text="{Binding pro_player}"/>
-                    <TextBlock Grid.Column="2" Foreground="LightBlue" FontSize="20" Text="{Binding pro_point}"/>
-                    <TextBlock Grid.Column="4" Foreground="red" FontSize="15" Text="{Binding pro_exter_point}"/>
-                </Grid>
-
-                <Grid Grid.Column="2" Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0" Foreground="black" FontSize="15" Text="{Binding pro_creat_time}"/>
-                    <TextBlock Grid.Column="2" Foreground="LightBlue" FontSize="15" Text="{Binding pro_time}"/>
-                </Grid>
-            </Grid>
-        </DataTemplate>
 
         <!-- ************************************************************************************************-->
         <!-- nmo-mod包列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_nmo_form_mod_mod_list">
+        <DataTemplate x:Key="ui_temp_form_nmo_form_mod_mod_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -510,81 +378,6 @@
                             </TextBlock.ToolTip>
                         </TextBlock>
                         <TextBlock Grid.Column="2" Grid.Row="7" Foreground="white" Width="200" FontSize="15" Text="{Binding pro_describe}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_describe}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                    </Grid>
-                </Expander>
-
-
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_nmo_form_mod_mod_list">
-            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Row="0" Grid.RowSpan="15" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_image}" Stroke="white"/>
-                </Grid>
-
-                <TextBlock Grid.Column="3" Grid.Row="1" Foreground="Black" FontSize="20" Text="{Binding pro_title}"/>
-                <Expander Header="详细信息" Grid.Column="3" Grid.Row="3" Foreground="White" FontSize="15">
-                    <Grid Background="#00000000">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="2" Grid.Row="1" Foreground="Black" FontSize="15" Text="{Binding pro_name}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_name}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="3" Foreground="Black" FontSize="15" Text="{Binding pro_pid}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_pid}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="5" Foreground="Black" FontSize="15" Text="{Binding pro_creator}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_creator}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="7" Foreground="Black" FontSize="15" Width="200" Text="{Binding pro_describe}">
                             <TextBlock.ToolTip>
                                 <Grid Background="White" Width="200">
                                     <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_describe}" TextWrapping="Wrap"/>
@@ -599,7 +392,7 @@
         </DataTemplate>
 
         <!-- nmo-模组包列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_nmo_form_mod_ph_list">
+        <DataTemplate x:Key="ui_temp_form_nmo_form_mod_ph_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -662,81 +455,6 @@
                             </TextBlock.ToolTip>
                         </TextBlock>
                         <TextBlock Grid.Column="2" Grid.Row="7" Foreground="white" Width="200" FontSize="15" Text="{Binding pro_describe}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_describe}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                    </Grid>
-                </Expander>
-
-
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_nmo_form_mod_ph_list">
-            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Row="0" Grid.RowSpan="15" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_image}" Stroke="white"/>
-                </Grid>
-
-                <TextBlock Grid.Column="3" Grid.Row="1" Foreground="Black" FontSize="20" Text="{Binding pro_title}"/>
-                <Expander Header="详细信息" Grid.Column="3" Grid.Row="3" Foreground="White" FontSize="15">
-                    <Grid Background="#00000000">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="2" Grid.Row="1" Foreground="Black" FontSize="15" Text="{Binding pro_name}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_name}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="3" Foreground="Black" FontSize="15" Text="{Binding pro_pid}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_pid}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="5" Foreground="Black" FontSize="15" Text="{Binding pro_creator}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_creator}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="7" Foreground="Black" FontSize="15" Width="200" Text="{Binding pro_describe}">
                             <TextBlock.ToolTip>
                                 <Grid Background="White" Width="200">
                                     <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_describe}" TextWrapping="Wrap"/>
@@ -752,7 +470,7 @@
 
         <!-- ************************************************************************************************-->
         <!-- 图片-材质包列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_photo_form_material_list">
+        <DataTemplate x:Key="ui_temp_form_photo_form_material_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -767,34 +485,6 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Foreground="White" FontSize="15" Grid.Column="3" Grid.Row="1" Text="{Binding pro_title}"/>
-
-                <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_image}" Stroke="white"/>
-                </Grid>
-
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_photo_form_material_list">
-            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="3"  Grid.Row="1" Text="{Binding pro_title}"/>
 
                 <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -810,7 +500,7 @@
         </DataTemplate>
 
         <!-- 图片-背景包列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_photo_form_background_list">
+        <DataTemplate x:Key="ui_temp_form_photo_form_background_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -825,34 +515,6 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Foreground="White" FontSize="15" Grid.Column="3" Grid.Row="1" Text="{Binding pro_title}"/>
-
-                <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_image}" Stroke="white"/>
-                </Grid>
-
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_photo_form_background_list">
-            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="3"  Grid.Row="1" Text="{Binding pro_title}"/>
 
                 <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -869,7 +531,7 @@
 
         <!-- ************************************************************************************************-->
         <!-- 音乐-音效包列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_wave_form_wave_list">
+        <DataTemplate x:Key="ui_temp_form_wave_form_wave_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -884,34 +546,6 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Foreground="White" FontSize="15" Grid.Column="3" Grid.Row="1" Text="{Binding pro_title}"/>
-
-                <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_image}" Stroke="white"/>
-                </Grid>
-
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_wave_form_wave_list">
-            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="3"  Grid.Row="1" Text="{Binding pro_title}"/>
 
                 <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -927,7 +561,7 @@
         </DataTemplate>
 
         <!-- 音乐-bgm包列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_wave_form_bgm_list">
+        <DataTemplate x:Key="ui_temp_form_wave_form_bgm_list">
             <Grid Height="auto" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -942,34 +576,6 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Foreground="White" FontSize="15" Grid.Column="3" Grid.Row="1" Text="{Binding pro_title}"/>
-
-                <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Ellipse Grid.Row="1" Fill="{Binding pro_image}" Stroke="white"/>
-                </Grid>
-
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_wave_form_bgm_list">
-            <Grid Height="auto" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="3"  Grid.Row="1" Text="{Binding pro_title}"/>
 
                 <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -987,7 +593,7 @@
         <!-- ************************************************************************************************-->
 
         <!-- 设置-检测本地排行榜的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_setting_form_local_hero_list">
+        <DataTemplate x:Key="ui_temp_form_setting_form_local_hero_list">
             <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -1007,31 +613,11 @@
 
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_setting_form_local_hero_list">
-            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="black" FontSize="15" Text="{Binding pro_name}"/>
-                <TextBlock Grid.Column="3" Grid.Row="1" Foreground="black" FontSize="15" Text="{Binding pro_score}"/>
-
-            </Grid>
-        </DataTemplate>
 
         <!-- ************************************************************************************************-->
 
         <!-- 设置-本地排行榜备份列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_setting_form_local_hero_backups_list">
+        <DataTemplate x:Key="ui_temp_form_setting_form_local_hero_backups_list">
             <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -1047,27 +633,11 @@
 
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_setting_form_local_hero_backups_list">
-            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Foreground="Black" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{Binding pro_title}"/>
-
-            </Grid>
-        </DataTemplate>
 
         <!-- ************************************************************************************************-->
 
         <!-- 联机对战-加入服务器人员列表的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_form_web_form_people_list">
+        <DataTemplate x:Key="ui_temp_form_web_form_people_list">
             <Grid Height="50" Background="{DynamicResource ui_temp_windows10_item_bk}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -1093,99 +663,60 @@
 
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_form_web_form_people_list">
-            <Grid Height="50" Background="{DynamicResource ui_temp_windows7_item_bk}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="1" Grid.Row="1" Text="{Binding pro_name}" HorizontalAlignment="Center"/>
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="3" Grid.Row="1" Text="{Binding pro_ip}" HorizontalAlignment="Center"/>
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="5" Grid.Row="1" Text="{Binding pro_port}" HorizontalAlignment="Center"/>
-                <TextBlock Foreground="black" FontSize="15" Grid.Column="7" Grid.Row="1" Text="{Binding pro_state}" HorizontalAlignment="Center"/>
-
-            </Grid>
-        </DataTemplate>
 
         <!-- ************************************************************************************************-->
 
         <!-- 窗口-选择项目的模板-->
-        <DataTemplate x:Key="ui_temp_windows10_window_select_item_list">
-            <Grid Height="80" Background="{DynamicResource ui_temp_windows10_item_bk}">
+        <DataTemplate x:Key="ui_temp_window_select_item_list">
+            <Grid Height="80">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="white" FontSize="20" Text="{Binding pro_title}">
-                    <TextBlock.ToolTip>
-                        <Grid Background="White">
-                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_title}"/>
-                        </Grid>
-                    </TextBlock.ToolTip>
-                </TextBlock>
+                <!-- 选中圆圈-->
+                <Grid Grid.Row="2" Grid.Column="0" Height="20" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Ellipse Fill="#00000000" Stroke="#ff1e90ff"/>
+                    <Ellipse Fill="{Binding pro_fill}" Stroke="#00000000" Margin="5"/>
+                </Grid>
 
-                <TextBlock Grid.Column="1" Grid.Row="3" Foreground="white" FontSize="15" Text="{Binding pro_text}">
-                    <TextBlock.ToolTip>
-                        <Grid Background="White">
-                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_text}"/>
-                        </Grid>
-                    </TextBlock.ToolTip>
-                </TextBlock>
 
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ui_temp_windows7_window_select_item_list">
-            <Grid Height="80" Background="{DynamicResource ui_temp_windows7_item_bk}" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <!-- 文本-->
+                <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="black" FontSize="20" Text="{Binding pro_title}">
-                    <TextBlock.ToolTip>
-                        <Grid Background="White">
-                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_title}"/>
-                        </Grid>
-                    </TextBlock.ToolTip>
-                </TextBlock>
+                    <TextBlock Grid.Row="1" Foreground="black" FontSize="15" Text="{Binding pro_title}">
+                        <TextBlock.ToolTip>
+                            <Grid Background="White">
+                                <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_title}"/>
+                            </Grid>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
 
-                <TextBlock Grid.Column="1" Grid.Row="3" Foreground="Black" FontSize="15" Text="{Binding pro_text}">
-                    <TextBlock.ToolTip>
-                        <Grid Background="White">
-                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_text}"/>
-                        </Grid>
-                    </TextBlock.ToolTip>
-                </TextBlock>
+                    <TextBlock Grid.Row="3" Foreground="black" FontSize="12" Text="{Binding pro_text}">
+                        <TextBlock.ToolTip>
+                            <Grid Background="White">
+                                <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_text}"/>
+                            </Grid>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+
+
+                </Grid>
 
             </Grid>
         </DataTemplate>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ballance_tools"
         mc:Ignorable="d"
-        Title="用户登录 --- ScoreManager" Height="300" Width="500" Icon="icon.ico">
+        Title="用户登录 --- ScoreManager" Height="300" Width="500" Icon="/ballance_tools;component/icon.ico">
     <Grid Background="#FF2D2D2D">
         <Grid.RowDefinitions >
             <RowDefinition Height="*"/>

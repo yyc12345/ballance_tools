@@ -78,7 +78,7 @@ Class MainWindow
                     app_progress_background(Nothing, False)
                     app_init_background(Nothing, False)
                 Catch ex As Exception
-                    MsgBox(ex.Message, 16, "Ballance工具箱---发生错误")
+                    window_dialogs_show("Ballance工具箱---发生错误", ex.Message, 2, 1, False, "确认", "", Me)
                     Environment.Exit(250)
                 End Try
 
@@ -145,7 +145,7 @@ Class MainWindow
                 run_log.WriteLine(ex.StackTrace)
                 run_log.WriteLine("---引发当前异常的方法---")
                 run_log.WriteLine(ex.TargetSite)
-                MsgBox(ex.Message, 16, "Ballance工具箱---发生错误")
+                window_dialogs_show("Ballance工具箱---发生错误", ex.Message, 2, 1, False, "确认", "", Me)
                 run_log.Dispose()
                 Environment.Exit(250)
             End Try
@@ -392,7 +392,7 @@ Class MainWindow
 
         If ballance_start_path = "" Or System.IO.File.Exists(ballance_start_path & "Startup.exe") = False Then
             '没有读到地址
-            MsgBox("没有找到Ballance的安装位置，请选择你安装的Ballance的主启动程序Startup.exe（位于 Ballance安装目录 下）", MsgBoxStyle.Exclamation, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "没有找到Ballance的安装位置，请选择你安装的Ballance的主启动程序Startup.exe（位于 Ballance安装目录 下）", 0, 1, False, "确认", "", Me)
             If use_debug_log = True Then
                 debug_log.WriteLine("没有读到启动地址，已要求用户强制输入")
             End If
@@ -418,7 +418,7 @@ Class MainWindow
                 If use_debug_log = True Then
                     debug_log.WriteLine("用户未输入主程序地址，强制退出")
                 End If
-                MsgBox("您必须选择Ballance主启动程序Startup.exe，否则这将无法开启工具箱，现在程序即将退出！", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "您必须选择Ballance主启动程序Startup.exe，否则这将无法开启工具箱，现在程序即将退出！", 2, 1, False, "确认", "", Me)
                 Environment.Exit(1)
             End If
 
@@ -448,47 +448,47 @@ Class MainWindow
     ''' <param name="use_debug_log">是否使用debug_log</param>
     Public Sub app_init_user_contorl(ByRef debug_log As System.IO.StreamWriter, ByVal use_debug_log As Boolean)
 
+        ui_form_level_form_check_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_level_form_check_list"), DataTemplate)
+        ui_form_level_form_level_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_level_form_level_list"), DataTemplate)
+        ui_form_level_form_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_level_form_hero_list"), DataTemplate)
+        ui_form_setting_form_local_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_setting_form_local_hero_list"), DataTemplate)
+        ui_form_photo_form_background_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_photo_form_background_list"), DataTemplate)
+        ui_form_photo_form_material_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_photo_form_material_list"), DataTemplate)
+        ui_form_wave_form_wave_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_wave_form_wave_list"), DataTemplate)
+        ui_form_wave_form_bgm_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_wave_form_bgm_list"), DataTemplate)
+        ui_form_nmo_form_mod_mod_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_nmo_form_mod_mod_list"), DataTemplate)
+        ui_form_nmo_form_mod_ph_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_nmo_form_mod_ph_list"), DataTemplate)
+        ui_form_setting_form_local_hero_backups_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_setting_form_local_hero_backups_list"), DataTemplate)
+        ui_form_web_form_people_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_form_web_form_people_list"), DataTemplate)
 
         '对各个列表的模板进行设置************************************************************************************************
-        If (Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2) Or Environment.OSVersion.Version.Major > 6 Then
-            'windows8以上
-            ui_form_level_form_check_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_level_form_check_list"), DataTemplate)
-            ui_form_level_form_level_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_level_form_level_list"), DataTemplate)
-            ui_form_level_form_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_level_form_hero_list"), DataTemplate)
-            ui_form_setting_form_local_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_setting_form_local_hero_list"), DataTemplate)
-            ui_form_photo_form_background_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_photo_form_background_list"), DataTemplate)
-            ui_form_photo_form_material_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_photo_form_material_list"), DataTemplate)
-            ui_form_wave_form_wave_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_wave_form_wave_list"), DataTemplate)
-            ui_form_wave_form_bgm_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_wave_form_bgm_list"), DataTemplate)
-            ui_form_nmo_form_mod_mod_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_nmo_form_mod_mod_list"), DataTemplate)
-            ui_form_nmo_form_mod_ph_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_nmo_form_mod_ph_list"), DataTemplate)
-            ui_form_setting_form_local_hero_backups_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_setting_form_local_hero_backups_list"), DataTemplate)
-            ui_form_web_form_people_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows10_form_web_form_people_list"), DataTemplate)
+        'If (Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2) Or Environment.OSVersion.Version.Major > 6 Then
+        '    'windows8以上
 
-            If use_debug_log = True Then
-                debug_log.WriteLine("检测到windows8(包括)以上os")
-            End If
+        '    If use_debug_log = True Then
+        '        debug_log.WriteLine("检测到windows8(包括)以上os")
+        '    End If
 
-        Else
-            'windows8以下
-            ui_form_level_form_check_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_level_form_check_list"), DataTemplate)
-            ui_form_level_form_level_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_level_form_level_list"), DataTemplate)
-            ui_form_level_form_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_level_form_hero_list"), DataTemplate)
-            ui_form_setting_form_local_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_setting_form_local_hero_list"), DataTemplate)
-            ui_form_photo_form_background_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_photo_form_background_list"), DataTemplate)
-            ui_form_photo_form_material_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_photo_form_material_list"), DataTemplate)
-            ui_form_wave_form_wave_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_wave_form_wave_list"), DataTemplate)
-            ui_form_wave_form_bgm_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_wave_form_bgm_list"), DataTemplate)
-            ui_form_nmo_form_mod_mod_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_nmo_form_mod_mod_list"), DataTemplate)
-            ui_form_nmo_form_mod_ph_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_nmo_form_mod_ph_list"), DataTemplate)
-            ui_form_setting_form_local_hero_backups_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_setting_form_local_hero_backups_list"), DataTemplate)
-            ui_form_web_form_people_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_web_form_people_list"), DataTemplate)
+        'Else
+        '    'windows8以下
+        '    ui_form_level_form_check_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_level_form_check_list"), DataTemplate)
+        '    ui_form_level_form_level_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_level_form_level_list"), DataTemplate)
+        '    ui_form_level_form_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_level_form_hero_list"), DataTemplate)
+        '    ui_form_setting_form_local_hero_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_setting_form_local_hero_list"), DataTemplate)
+        '    ui_form_photo_form_background_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_photo_form_background_list"), DataTemplate)
+        '    ui_form_photo_form_material_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_photo_form_material_list"), DataTemplate)
+        '    ui_form_wave_form_wave_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_wave_form_wave_list"), DataTemplate)
+        '    ui_form_wave_form_bgm_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_wave_form_bgm_list"), DataTemplate)
+        '    ui_form_nmo_form_mod_mod_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_nmo_form_mod_mod_list"), DataTemplate)
+        '    ui_form_nmo_form_mod_ph_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_nmo_form_mod_ph_list"), DataTemplate)
+        '    ui_form_setting_form_local_hero_backups_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_setting_form_local_hero_backups_list"), DataTemplate)
+        '    ui_form_web_form_people_list.ItemTemplate = CType(Application.Current.Resources("ui_temp_windows7_form_web_form_people_list"), DataTemplate)
 
-            If use_debug_log = True Then
-                debug_log.WriteLine("检测到windows8(不包括)以下os")
-            End If
+        '    If use_debug_log = True Then
+        '        debug_log.WriteLine("检测到windows8(不包括)以下os")
+        '    End If
 
-        End If
+        'End If
 
         If use_debug_log = True Then
             debug_log.WriteLine("列表模板应用完毕")
@@ -1691,14 +1691,14 @@ sm_error:
 
         End Try
 
-        MsgBox("Ballance即将启动，工具箱将关闭。", 64, "Ballance工具箱")
+        window_dialogs_show("Ballance工具箱", "Ballance即将启动，工具箱将关闭。", 0, 1, False, "确认", "", Me)
         Process.Start(ballance_start_path + "Startup.exe")
         Environment.Exit(2)
     End Sub
 
     '搜索文件
     Private Sub ui_form_start_search_file(sender As Object, e As MouseButtonEventArgs)
-        MsgBox("请选择你安装的Ballance的主启动程序Startup.exe（位于 Ballance安装目录 下）", MsgBoxStyle.Exclamation, "Ballance工具箱")
+        window_dialogs_show("Ballance工具箱", "请选择你安装的Ballance的主启动程序Startup.exe（位于 Ballance安装目录 下）", 0, 1, False, "确认", "", Me)
 
         open_ballance_dir.ShowDialog()
         Dim reg_word As String = ""
@@ -1814,44 +1814,45 @@ sm_error:
 
     '还原
     Private Sub ui_form_level_form_check_restart_btn(sender As Object, e As RoutedEventArgs)
-        If ui_connect_form_level_form_check_list.Count <> 0 Then
-            Dim select_level(13) As Boolean
-            For a = 1 To 13
-                select_level(a) = False
-            Next
+        'TODO:开发完这个功能
+        'If ui_connect_form_level_form_check_list.Count <> 0 Then
+        '    Dim select_level(13) As Boolean
+        '    For a = 1 To 13
+        '        select_level(a) = False
+        '    Next
 
-            For b = 0 To ui_form_level_form_check_list.SelectedItems.Count - 1
-                For c = 0 To ui_connect_form_level_form_check_list.Count
-                    '相同了
-                    If ui_connect_form_level_form_check_list.Item(c).Equals(ui_form_level_form_check_list.SelectedItems.Item(b)) = True Then
-                        select_level(c + 1) = True
-                        Exit For
-                    End If
-                Next
-            Next
+        '    For b = 0 To ui_form_level_form_check_list.SelectedItems.Count - 1
+        '        For c = 0 To ui_connect_form_level_form_check_list.Count
+        '            '相同了
+        '            If ui_connect_form_level_form_check_list.Item(c).Equals(ui_form_level_form_check_list.SelectedItems.Item(b)) = True Then
+        '                select_level(c + 1) = True
+        '                Exit For
+        '            End If
+        '        Next
+        '    Next
 
 
-            If ui_form_level_form_check_list.SelectedIndex <> -1 Then
-                Dim ok_word As String = "确认重置以下关卡吗？"
-                For d = 1 To 13
-                    If select_level(d) = True Then
-                        ok_word = ok_word & vbCrLf & "Level " & d & "（第" & d & "关）"
-                    End If
-                Next
+        '    If ui_form_level_form_check_list.SelectedIndex <> -1 Then
+        '        Dim ok_word As String = "确认重置以下关卡吗？"
+        '        For d = 1 To 13
+        '            If select_level(d) = True Then
+        '                ok_word = ok_word & vbCrLf & "Level " & d & "（第" & d & "关）"
+        '            End If
+        '        Next
 
-                If MsgBox(ok_word, MsgBoxStyle.OkCancel + 32, "Ballance工具箱") = MsgBoxResult.Ok Then
-                    '开始替换
+        '        If MsgBox(ok_word, MsgBoxStyle.OkCancel + 32, "Ballance工具箱") = MsgBoxResult.Ok Then
+        '            '开始替换
 
-                End If
-            Else
-                MsgBox("您没有选中任何关卡", 16, "Ballance工具箱")
-            End If
+        '        End If
+        '    Else
+        '        MsgBox("您没有选中任何关卡", 16, "Ballance工具箱")
+        '    End If
 
-        Else
+        'Else
 
-            MsgBox("请先检测一次所有关卡才能进行重置", 16, "Ballance工具箱")
+        '    MsgBox("请先检测一次所有关卡才能进行重置", 16, "Ballance工具箱")
 
-        End If
+        'End If
     End Sub
 
 
@@ -1950,7 +1951,7 @@ sm_error:
                                 End If
 
                             Catch ex As Exception
-                                MsgBox("您的用户名与密码可能有误，或者网络出现了一些小问题，请在稍后重新点击该关卡以重新获取英雄榜", 16, "Ballance工具箱")
+                                window_dialogs_show("Ballance工具箱", "您的用户名与密码可能有误，或者网络出现了一些小问题，请在稍后重新点击该关卡以重新获取英雄榜", 2, 1, False, "确认", "", Me)
                                 user_name = ""
                                 user_password = ""
                             End Try
@@ -1976,7 +1977,7 @@ sm_error:
 
                 End If
             Else
-                MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
             End If
         End If
 
@@ -1996,11 +1997,13 @@ sm_error:
                     If System.IO.File.Exists(ballance_start_path & "3d entities\level\level_" & a & ".nmo") = True Then
                         aaa.pro_title = "第" & a & "关"
                         aaa.pro_text = ballance_start_path & "3d entities\level\level_" & a & ".nmo"
+                        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
                     End If
                 Else
                     If System.IO.File.Exists(ballance_start_path & "3d entities\level\level_0" & a & ".nmo") = True Then
                         aaa.pro_title = "第" & a & "关"
                         aaa.pro_text = ballance_start_path & "3d entities\level\level_0" & a & ".nmo"
+                        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
                     End If
                 End If
 
@@ -2013,11 +2016,13 @@ sm_error:
                 aaa.pro_title = "第14关"
                 aaa.pro_text = ballance_start_path & "3d entities\level\level_14.nmo"
                 ui_connect_window_select_item_list.Add(aaa)
+                aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
                 aaa = New ui_depend_window_select_item_list
             End If
             If System.IO.File.Exists(ballance_start_path & "3d entities\level\level_15.nmo") = True Then
                 aaa.pro_title = "第15关"
                 aaa.pro_text = ballance_start_path & "3d entities\level\level_15.nmo"
+                aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
                 ui_connect_window_select_item_list.Add(aaa)
                 aaa = New ui_depend_window_select_item_list
             End If
@@ -2026,6 +2031,7 @@ sm_error:
 
             Dim linshi = New Window_select_item
             ui_connect_window_select_item_list_select_index = -1
+            ui_connect_window_select_item_list_title = "选择安装到的关卡"
             linshi.Owner = Me
             linshi.ShowDialog()
 
@@ -2042,10 +2048,10 @@ sm_error:
                            ballance_start_path & "3d entities\level\level_0" & ui_connect_window_select_item_list_select_index & ".nmo")
                 End If
 
-                MsgBox("安装完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "安装完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -2106,12 +2112,12 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("添加完成！", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "添加完成！", 0, 1, False, "确认", "", Me)
 
 
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -2122,7 +2128,7 @@ sm_error:
             If open_map_file.ShowDialog() = True Then
                 If System.IO.File.Exists(Environment.CurrentDirectory & "\map\" & open_map_file.SafeFileName) = True Then
                     '存在了，报错
-                    MsgBox("地图 " & open_map_file.SafeFileName & " 已经存在，无法添加", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "地图 " & open_map_file.SafeFileName & " 已经存在，无法添加", 2, 1, False, "确认", "", Me)
                 Else
                     '不存在
                     System.IO.File.Copy(open_map_file.FileName,
@@ -2191,11 +2197,11 @@ sm_error:
                     '更新ui-listbox
                     ui_update_list()
 
-                    MsgBox("添加完成", 64, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "添加完成", 2, 1, False, "确认", "", Me)
                 End If
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
 
     End Sub
@@ -2204,9 +2210,12 @@ sm_error:
     Private Sub ui_form_level_form_level_menu_delete_map(sender As Object, e As RoutedEventArgs)
 
         If ui_form_level_form_level_list.SelectedIndex <> -1 And ui_form_level_form_level_list_form_search.Text = "" Then
-            If MsgBox("确认删除地图 " &
+
+            window_dialogs_show("Ballance工具箱", "确认删除地图 " &
                               ui_connect_form_level_form_level_list.Item(ui_form_level_form_level_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+
+            If window_dialogs_select_btn = 0 Then
                 '删除
                 System.IO.File.Delete(Environment.CurrentDirectory & "\map\" &
                                       ui_connect_form_level_form_level_list.Item(ui_form_level_form_level_list.SelectedIndex).pro_title & ".nmo")
@@ -2219,10 +2228,10 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("删除完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "删除完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
 
     End Sub
@@ -2273,7 +2282,7 @@ sm_error:
         '传递ui
         ui_form_nmo_form_normal_ball_state.Text = "当前球的状态是：正常速度"
 
-        MsgBox("安装完成", 64, "Ballane工具箱")
+        window_dialogs_show("Ballance工具箱", "安装完成", 0, 1, False, "确认", "", Me)
     End Sub
     '倍速球
     Private Sub ui_form_nmo_form_normal_ball_speed(sender As Object, e As RoutedEventArgs)
@@ -2282,50 +2291,23 @@ sm_error:
         ui_connect_window_select_item_list.Clear()
         ui_connect_window_select_item_list_select_index = 0
 
-        aaa.pro_title = "1.75倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "2倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "3倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "4倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "5倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "6倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "7倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "8倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "9倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "10倍速"
-        aaa.pro_text = ""
-        ui_connect_window_select_item_list.Add(aaa)
+        For a = 1 To 10
+            If a = 1 Then
+                aaa.pro_title = "1.75倍速"
+            Else
+                aaa.pro_title = a & "倍速"
+            End If
+            aaa.pro_text = ""
+            aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+            ui_connect_window_select_item_list.Add(aaa)
+            aaa = New ui_depend_window_select_item_list
+        Next
 
         '显示对话框
 
         Dim linshi = New Window_select_item
         ui_connect_window_select_item_list_select_index = -1
+        ui_connect_window_select_item_list_title = "选择球的速度"
         linshi.Owner = Me
         linshi.ShowDialog()
 
@@ -2339,7 +2321,7 @@ sm_error:
             '传递ui
             ui_form_nmo_form_normal_ball_state.Text = "当前球的状态是：" & ui_connect_window_select_item_list.Item(ui_connect_window_select_item_list_select_index).pro_title
 
-            MsgBox("安装完成", 64, "Ballane工具箱")
+            window_dialogs_show("Ballance工具箱", "安装完成", 0, 1, False, "确认", "", Me)
         End If
 
     End Sub
@@ -2351,7 +2333,7 @@ sm_error:
         '传递ui
         ui_form_nmo_form_normal_ball_state.Text = "当前球的状态是：三高球"
 
-        MsgBox("安装完成", 64, "Ballane工具箱")
+        window_dialogs_show("Ballance工具箱", "安装完成", 0, 1, False, "确认", "", Me)
     End Sub
 
     '开启无限命
@@ -2359,14 +2341,14 @@ sm_error:
         System.IO.File.Delete(ballance_start_path & "3D Entities\Gameplay.nmo")
         System.IO.File.Copy(Environment.CurrentDirectory & "\system_nmo\life\on.nmo", ballance_start_path & "3D Entities\Gameplay.nmo")
 
-        MsgBox("安装完成", 64, "Ballane工具箱")
+        window_dialogs_show("Ballance工具箱", "安装完成", 0, 1, False, "确认", "", Me)
     End Sub
     '关闭无限命
     Private Sub ui_form_nmo_form_normal_life_del(sender As Object, e As RoutedEventArgs)
         System.IO.File.Delete(ballance_start_path & "3D Entities\Gameplay.nmo")
         System.IO.File.Copy(Environment.CurrentDirectory & "\system_nmo\life\off.nmo", ballance_start_path & "3D Entities\Gameplay.nmo")
 
-        MsgBox("安装完成", 64, "Ballane工具箱")
+        window_dialogs_show("Ballance工具箱", "安装完成", 0, 1, False, "确认", "", Me)
     End Sub
 
 
@@ -2398,15 +2380,15 @@ sm_error:
                     '更新ui-listbox
                     ui_update_list()
 
-                    MsgBox("添加完成！", 64, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "添加完成！", 0, 1, False, "确认", "", Me)
 
                 End If
 
             Else
-                MsgBox("您没有安装BML（Ballance Mod Loader），您必须安装BML才能添加Mod包！", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "您没有安装BML（Ballance Mod Loader），您必须安装BML才能添加Mod包！", 2, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -2430,25 +2412,29 @@ sm_error:
 
                         '更新ui-listbox
                         ui_update_list()
+
+                        window_dialogs_show("Ballance工具箱", "添加完毕", 0, 1, False, "确认", "", Me)
                     Else
-                        MsgBox("该Mod已存在，无法继续添加！", 16, "Ballance工具箱")
+                        window_dialogs_show("Ballance工具箱", "该Mod已存在，无法继续添加！", 2, 1, False, "确认", "", Me)
                     End If
 
                 End If
             Else
-                MsgBox("您没有安装BML（Ballance Mod Loader），您必须安装BML才能添加Mod！", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "您没有安装BML（Ballance Mod Loader），您必须安装BML才能添加Mod！", 2, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     'mod删除
     Private Sub ui_form_nmo_form_mod_mod_del(sender As Object, e As RoutedEventArgs)
         If ui_form_nmo_form_mod_mod_list.SelectedIndex <> -1 And ui_form_nmo_form_mod_mod_list_form_search.Text = "" Then
-            If MsgBox("确认删除Mod " &
+
+            window_dialogs_show("Ballance工具箱", "确认删除Mod " &
                               ui_connect_form_nmo_form_mod_mod_list.Item(ui_form_nmo_form_mod_mod_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
                 '删除
                 System.IO.File.Delete(ballance_start_path & "ModLoader\Mods\" &
                                       ui_connect_form_nmo_form_mod_mod_list.Item(ui_form_nmo_form_mod_mod_list.SelectedIndex).pro_title & ".nmo")
@@ -2461,10 +2447,10 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("删除完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "删除完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -2526,11 +2512,11 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("添加完成！", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "添加完成！", 0, 1, False, "确认", "", Me)
 
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -2554,20 +2540,22 @@ sm_error:
                     '更新ui-listbox
                     ui_update_list()
                 Else
-                    MsgBox("该模组已存在，无法继续添加！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "该模组已存在，无法继续添加！", 2, 1, False, "确认", "", Me)
                 End If
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '模组删除
     Private Sub ui_form_nmo_form_mod_ph_del(sender As Object, e As RoutedEventArgs)
         If ui_form_nmo_form_mod_ph_list.SelectedIndex <> -1 And ui_form_nmo_form_mod_ph_list_form_search.Text = "" Then
-            If MsgBox("确认删除模组 " &
+
+            window_dialogs_show("Ballance工具箱", "确认删除模组 " &
                               ui_connect_form_nmo_form_mod_ph_list.Item(ui_form_nmo_form_mod_ph_list.SelectedIndex).pro_title &
-                              " 吗？删除可能回导致某些地图不能正常加载！", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？删除可能回导致某些地图不能正常加载！", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
                 '删除
                 System.IO.File.Delete(ballance_start_path & "3D Entities\PH\" &
                                       ui_connect_form_nmo_form_mod_ph_list.Item(ui_form_nmo_form_mod_ph_list.SelectedIndex).pro_title & ".nmo")
@@ -2580,10 +2568,10 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("删除完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "删除完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -2623,7 +2611,8 @@ sm_error:
     '安装
     Private Sub ui_form_nmo_form_mod_bml_install_run(sender As Object, e As RoutedEventArgs) Handles ui_form_nmo_form_mod_bml_install.Click
 
-        If MsgBox("确认安装？安装之后Ballance本身的文件将会被修改，而且安装后，如果破了纪录，认证你的记录是合法的将会变得困难，带来诸多不便！", 32 + 1 + 256, "Ballance工具箱") = 1 Then
+        window_dialogs_show("Ballance工具箱", "确认安装？安装之后Ballance本身的文件将会被修改，而且安装后，如果破了纪录，认证你的记录是合法的将会变得困难，带来诸多不便！", 1, 2, False, "确认", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
             If System.IO.File.Exists(Environment.CurrentDirectory & "\system_nmo\bml_install.exe") = True Then
 
                 System.Diagnostics.Process.Start(Environment.CurrentDirectory & "\system_nmo\bml_install.exe")
@@ -2632,7 +2621,7 @@ sm_error:
                 ui_form_nmo_form_mod_bml_can_install.Width = New GridLength(0)
 
             Else
-                MsgBox("无可用的BML安装源，需要从Ballance工具箱部署器部署有关安装源才能执行安装", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "无可用的BML安装源，需要从Ballance工具箱部署器部署有关安装源才能执行安装", 2, 1, False, "确认", "", Me)
             End If
         End If
 
@@ -2664,20 +2653,22 @@ sm_error:
                     '更新ui-listbox
                     ui_update_list()
                 Else
-                    MsgBox("该材质包已存在，无法继续添加！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "该材质包已存在，无法继续添加！", 2, 1, False, "确认", "", Me)
                 End If
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '删除材质
     Private Sub ui_form_photo_form_material_del(sender As Object, e As RoutedEventArgs)
         If ui_form_photo_form_material_list.SelectedIndex <> -1 And ui_form_photo_form_material_list_form_search.Text = "" Then
-            If MsgBox("确认删除材质包 " &
+
+            window_dialogs_show("Ballance工具箱", "确认删除材质包 " &
                               ui_connect_form_photo_form_material_list.Item(ui_form_photo_form_material_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
                 '删除
                 System.IO.File.Delete(Environment.CurrentDirectory & "\material\" &
                                       ui_connect_form_photo_form_material_list.Item(ui_form_photo_form_material_list.SelectedIndex).pro_title & ".bab")
@@ -2690,19 +2681,21 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("删除完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "删除完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '应用材质
     Private Sub ui_form_photo_form_material_apply(sender As Object, e As RoutedEventArgs)
         If ui_form_photo_form_material_list.SelectedIndex <> -1 And ui_form_photo_form_material_list_form_search.Text = "" Then
-            If MsgBox("确认应用材质 " &
+
+            window_dialogs_show("Ballance工具箱", "确认应用材质 " &
                                ui_connect_form_photo_form_material_list.Item(ui_form_photo_form_material_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
 
                 '显示对话框
 
@@ -2718,18 +2711,19 @@ sm_error:
 
                 linshi.Close()
 
-                MsgBox("应用成功", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "应用成功", 0, 1, False, "确认", "", Me)
             End If
 
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '还原为原版材质
     Private Sub ui_form_photo_form_material_return(sender As Object, e As RoutedEventArgs)
 
-        If MsgBox("确认还原？此操作将消耗一些时间，而且不可恢复", 32 + 1 + 256, "Ballance工具箱") = 1 Then
+        window_dialogs_show("Ballance工具箱", "确认还原？此操作将消耗一些时间，而且不可恢复", 1, 2, False, "确认", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
             If System.IO.File.Exists(Environment.CurrentDirectory & "\system_nmo\normal_material.zip") = True Then
 
                 '等待窗口
@@ -2742,13 +2736,13 @@ sm_error:
                     Dim aaa As New ICSharpCode.SharpZipLib.Zip.FastZip
                     aaa.ExtractZip(Environment.CurrentDirectory & "\system_nmo\normal_material.zip", ballance_start_path & "Textures\", Nothing)
                 Catch ex As Exception
-                    MsgBox("还原时出现错误，无法还原！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "还原时出现错误，无法还原！", 2, 1, False, "确认", "", Me)
                 End Try
 
                 linshi.Close()
 
             Else
-                MsgBox("无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 2, 1, False, "确认", "", Me)
             End If
         End If
 
@@ -2810,20 +2804,22 @@ sm_error:
                     '更新ui-listbox
                     ui_update_list()
                 Else
-                    MsgBox("该背景包已存在，无法继续添加！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "该背景包已存在，无法继续添加！", 2, 1, False, "确认", "", Me)
                 End If
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '删除选中背景包
     Private Sub ui_form_photo_form_background_del_bag(sender As Object, e As RoutedEventArgs)
         If ui_form_photo_form_background_list.SelectedIndex <> -1 And ui_form_photo_form_background_list_form_search.Text = "" Then
-            If MsgBox("确认删除背景包 " &
+
+            window_dialogs_show("Ballance工具箱", "确认删除背景包 " &
                               ui_connect_form_photo_form_background_list.Item(ui_form_photo_form_background_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
                 '删除
                 System.IO.File.Delete(Environment.CurrentDirectory & "\background\" &
                                       ui_connect_form_photo_form_background_list.Item(ui_form_photo_form_background_list.SelectedIndex).pro_title & ".bbb")
@@ -2836,10 +2832,10 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("删除完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "删除完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -2847,66 +2843,32 @@ sm_error:
     Private Sub ui_form_photo_form_background_apply(sender As Object, e As RoutedEventArgs)
         If ui_form_photo_form_background_list.SelectedIndex <> -1 And ui_form_photo_form_background_list_form_search.Text = "" Then
 
-            If MsgBox("确认应用背景包 " &
+            window_dialogs_show("Ballance工具箱", "确认应用背景包 " &
                               ui_connect_form_photo_form_background_list.Item(ui_form_photo_form_background_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
 
                 Dim aaa As New ui_depend_window_select_item_list
                 ui_connect_window_select_item_list.Clear()
                 ui_connect_window_select_item_list_select_index = 0
 
-                aaa.pro_title = "序号A"
-                aaa.pro_text = "第 3 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号B"
-                aaa.pro_text = "第 10 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号C"
-                aaa.pro_text = "第 5 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号D"
-                aaa.pro_text = "第 7 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号E"
-                aaa.pro_text = "第 2 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号F"
-                aaa.pro_text = "第 13 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号G"
-                aaa.pro_text = "第 8 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号H"
-                aaa.pro_text = "第 6 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号I"
-                aaa.pro_text = "第 12 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号J"
-                aaa.pro_text = "第 11 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号K"
-                aaa.pro_text = "第 9 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
-                aaa = New ui_depend_window_select_item_list
-                aaa.pro_title = "序号L"
-                aaa.pro_text = "第 1 关背景"
-                ui_connect_window_select_item_list.Add(aaa)
+                Dim level_bk_data As String = "A,第 3 关背景,B,第 10 关背景,C,第 5 关背景,D,第 7 关背景,E,第 2 关背景,F,第 13 关背景,G,第 8 关背景,H,第 6 关背景,I,第 12 关背景,J,第 11 关背景,K,第 9 关背景,L,第 1 关背景"
+                Dim level_bk_data_arr() As String = level_bk_data.Split(",")
+                For a = 0 To level_bk_data_arr.Count - 2 Step 2
+
+                    aaa.pro_title = "序号" & level_bk_data_arr(a)
+                    aaa.pro_text = level_bk_data_arr(a + 1)
+                    aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+                    ui_connect_window_select_item_list.Add(aaa)
+                    aaa = New ui_depend_window_select_item_list
+
+                Next
 
                 '显示对话框
 
                 Dim linshi = New Window_select_item
                 ui_connect_window_select_item_list_select_index = -1
+                ui_connect_window_select_item_list_title = "选择要应用到的背景序号"
                 linshi.Owner = Me
                 linshi.ShowDialog()
 
@@ -2953,7 +2915,7 @@ sm_error:
                         Case 11
                             bk_list = "L"
                         Case Else
-                            MsgBox("发生错误", 16, "Ballance工具箱")
+                            window_dialogs_show("Ballance工具箱", "发生错误", 2, 1, False, "确认", "", Me)
                             Exit Sub
                     End Select
 
@@ -2965,7 +2927,8 @@ sm_error:
 
                     linshi_2.Close()
 
-                    If MsgBox("已成功应用背景包，背景包要在游戏中应用需要重启程序一次，是否立即关闭程序，手动重启？" & vbCrLf & vbCrLf & "提示：替换多个背景序号的背景可以统一重启程序~", 32 + 1, "Ballance工具箱") = 1 Then
+                    window_dialogs_show("Ballance工具箱", "已成功应用背景包，背景包要在游戏中应用需要重启程序一次，是否立即关闭程序，手动重启？" & vbCrLf & vbCrLf & "提示：替换多个背景序号的背景可以统一重启程序~", 1, 2, False, "确认", "取消", Me)
+                    If window_dialogs_select_btn = 0 Then
                         Environment.Exit(0)
                     End If
 
@@ -2974,7 +2937,7 @@ sm_error:
             End If
 
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
 
     End Sub
@@ -2982,7 +2945,8 @@ sm_error:
     '还原为原版背景
     Private Sub ui_form_photo_form_background_return(sender As Object, e As RoutedEventArgs)
 
-        If MsgBox("确认还原？此操作将消耗一些时间，而且不可恢复", 32 + 1 + 256, "Ballance工具箱") = 1 Then
+        window_dialogs_show("Ballance工具箱", "确认还原？此操作将消耗一些时间，而且不可恢复", 1, 2, False, "确认", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
             If System.IO.File.Exists(Environment.CurrentDirectory & "\system_nmo\normal_background.zip") = True Then
 
                 '等待窗口
@@ -2995,12 +2959,12 @@ sm_error:
                     Dim aaa As New ICSharpCode.SharpZipLib.Zip.FastZip
                     aaa.ExtractZip(Environment.CurrentDirectory & "\system_nmo\normal_background.zip", ballance_start_path & "Textures\Sky\", Nothing)
                 Catch ex As Exception
-                    MsgBox("还原时出现错误，无法还原！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "还原时出现错误，无法还原！", 2, 1, False, "确认", "", Me)
                 End Try
 
                 linshi.Close()
             Else
-                MsgBox("无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 2, 1, False, "确认", "", Me)
             End If
         End If
 
@@ -3044,58 +3008,23 @@ sm_error:
         ui_connect_window_select_item_list.Clear()
         ui_connect_window_select_item_list_select_index = 0
 
-        aaa.pro_title = "序号A"
-        aaa.pro_text = "第 3 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号B"
-        aaa.pro_text = "第 10 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号C"
-        aaa.pro_text = "第 5 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号D"
-        aaa.pro_text = "第 7 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号E"
-        aaa.pro_text = "第 2 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号F"
-        aaa.pro_text = "第 13 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号G"
-        aaa.pro_text = "第 8 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号H"
-        aaa.pro_text = "第 6 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号I"
-        aaa.pro_text = "第 12 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号J"
-        aaa.pro_text = "第 11 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号K"
-        aaa.pro_text = "第 9 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
-        aaa = New ui_depend_window_select_item_list
-        aaa.pro_title = "序号L"
-        aaa.pro_text = "第 1 关背景"
-        ui_connect_window_select_item_list.Add(aaa)
+        Dim level_bk_data As String = "A,第 3 关背景,B,第 10 关背景,C,第 5 关背景,D,第 7 关背景,E,第 2 关背景,F,第 13 关背景,G,第 8 关背景,H,第 6 关背景,I,第 12 关背景,J,第 11 关背景,K,第 9 关背景,L,第 1 关背景"
+        Dim level_bk_data_arr() As String = level_bk_data.Split(",")
+        For a = 0 To level_bk_data_arr.Count - 2 Step 2
+
+            aaa.pro_title = "序号" & level_bk_data_arr(a)
+            aaa.pro_text = level_bk_data_arr(a + 1)
+            aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+            ui_connect_window_select_item_list.Add(aaa)
+            aaa = New ui_depend_window_select_item_list
+
+        Next
 
         '显示对话框
 
         Dim linshi = New Window_select_item
         ui_connect_window_select_item_list_select_index = -1
+        ui_connect_window_select_item_list_title = "选择要预览的背景序号"
         linshi.Owner = Me
         linshi.ShowDialog()
 
@@ -3145,20 +3074,22 @@ sm_error:
                     '更新ui-listbox
                     ui_update_list()
                 Else
-                    MsgBox("该音效包已存在，无法继续添加！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "该音效包已存在，无法继续添加！", 2, 1, False, "确认", "", Me)
                 End If
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '删除音效
     Private Sub ui_form_wave_form_wave_del(sender As Object, e As RoutedEventArgs)
         If ui_form_wave_form_wave_list.SelectedIndex <> -1 And ui_form_wave_form_wave_list_form_search.Text = "" Then
-            If MsgBox("确认删除音效包 " &
+
+            window_dialogs_show("Ballance工具箱", "确认删除音效包 " &
                               ui_connect_form_wave_form_wave_list.Item(ui_form_wave_form_wave_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
                 '删除
                 System.IO.File.Delete(Environment.CurrentDirectory & "\wave\" &
                                       ui_connect_form_wave_form_wave_list.Item(ui_form_wave_form_wave_list.SelectedIndex).pro_title & ".bwb")
@@ -3171,19 +3102,21 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("删除完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "删除完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '应用音效
     Private Sub ui_form_wave_form_wave_apply(sender As Object, e As RoutedEventArgs)
         If ui_form_wave_form_wave_list.SelectedIndex <> -1 And ui_form_wave_form_wave_list_form_search.Text = "" Then
-            If MsgBox("确认应用音效包 " &
+
+            window_dialogs_show("Ballance工具箱", "确认应用音效包 " &
                               ui_connect_form_wave_form_wave_list.Item(ui_form_wave_form_wave_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
 
                 '显示对话框
 
@@ -3199,18 +3132,19 @@ sm_error:
 
                 linshi.Close()
 
-                MsgBox("应用成功", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "应用成功", 0, 1, False, "确认", "", Me)
             End If
 
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '还原为原版音效
     Private Sub ui_form_wave_form_wave_return(sender As Object, e As RoutedEventArgs)
 
-        If MsgBox("确认还原？此操作将消耗一些时间，而且不可恢复", 32 + 1 + 256, "Ballance工具箱") = 1 Then
+        window_dialogs_show("Ballance工具箱", "确认还原？此操作将消耗一些时间，而且不可恢复", 1, 2, False, "确认", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
             If System.IO.File.Exists(Environment.CurrentDirectory & "\system_nmo\normal_wave.zip") = True Then
 
                 '等待窗口
@@ -3223,12 +3157,12 @@ sm_error:
                     Dim aaa As New ICSharpCode.SharpZipLib.Zip.FastZip
                     aaa.ExtractZip(Environment.CurrentDirectory & "\system_nmo\normal_wave.zip", ballance_start_path & "Sounds\", Nothing)
                 Catch ex As Exception
-                    MsgBox("还原时出现错误，无法还原！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "还原时出现错误，无法还原！", 2, 1, False, "确认", "", Me)
                 End Try
 
                 linshi.Close()
             Else
-                MsgBox("无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 2, 1, False, "确认", "", Me)
             End If
         End If
 
@@ -3289,20 +3223,22 @@ sm_error:
                     '更新ui-listbox
                     ui_update_list()
                 Else
-                    MsgBox("该BGM包已存在，无法继续添加！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "该BGM包已存在，无法继续添加！", 2, 1, False, "确认", "", Me)
                 End If
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '删除bgm
     Private Sub ui_form_wave_form_bgm_del(sender As Object, e As RoutedEventArgs)
         If ui_form_wave_form_bgm_list.SelectedIndex <> -1 And ui_form_wave_form_bgm_list_form_search.Text = "" Then
-            If MsgBox("确认删除BGM包 " &
+
+            window_dialogs_show("Ballance工具箱", "确认删除BGM包 " &
                               ui_connect_form_wave_form_bgm_list.Item(ui_form_wave_form_bgm_list.SelectedIndex).pro_title &
-                              " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                              " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
                 '删除
                 System.IO.File.Delete(Environment.CurrentDirectory & "\bgm\" &
                                       ui_connect_form_wave_form_bgm_list.Item(ui_form_wave_form_bgm_list.SelectedIndex).pro_title & ".bgb")
@@ -3315,19 +3251,21 @@ sm_error:
                 '更新ui-listbox
                 ui_update_list()
 
-                MsgBox("删除完成", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "删除完成", 0, 1, False, "确认", "", Me)
             End If
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
     '应用bgm
     Private Sub ui_form_wave_form_bgm_apply(sender As Object, e As RoutedEventArgs)
         If ui_form_wave_form_bgm_list.SelectedIndex <> -1 And ui_form_wave_form_bgm_list_form_search.Text = "" Then
-            If MsgBox("确认应用BGM包 " &
+
+            window_dialogs_show("Ballance工具箱", "确认应用BGM包 " &
                              ui_connect_form_wave_form_bgm_list.Item(ui_form_wave_form_bgm_list.SelectedIndex).pro_title &
-                             " 吗？", 32 + 1, "Ballance工具箱") = 1 Then
+                             " 吗？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
 
                 '显示对话框
 
@@ -3343,16 +3281,17 @@ sm_error:
 
                 linshi.Close()
 
-                MsgBox("应用成功", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "应用成功", 0, 1, False, "确认", "", Me)
 
-                If MsgBox("已成功应用BGM包，BGM包要在游戏中应用需要重启程序一次，是否立即关闭程序，手动重启？", 32 + 1, "Ballance工具箱") = 1 Then
+                window_dialogs_show("Ballance工具箱", "已成功应用BGM包，BGM包要在游戏中应用需要重启程序一次，是否立即关闭程序，手动重启？", 1, 2, False, "确认", "取消", Me)
+                If window_dialogs_select_btn = 0 Then
                     Environment.Exit(0)
                 End If
 
             End If
 
         Else
-            MsgBox("不能在搜索状态下执行任务，或者是没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "不能在搜索状态下执行任务，或者是没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
 
     End Sub
@@ -3360,7 +3299,8 @@ sm_error:
     '还原为原版bgm
     Private Sub ui_form_wave_form_bgm_return(sender As Object, e As RoutedEventArgs)
 
-        If MsgBox("确认还原？此操作将消耗一些时间，而且不可恢复", 32 + 1 + 256, "Ballance工具箱") = 1 Then
+        window_dialogs_show("Ballance工具箱", "确认还原？此操作将消耗一些时间，而且不可恢复", 1, 2, False, "确认", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
             If System.IO.File.Exists(Environment.CurrentDirectory & "\system_nmo\normal_bgm.zip") = True Then
 
                 '等待窗口
@@ -3373,12 +3313,12 @@ sm_error:
                     Dim aaa As New ICSharpCode.SharpZipLib.Zip.FastZip
                     aaa.ExtractZip(Environment.CurrentDirectory & "\system_nmo\normal_bgm.zip", ballance_start_path & "Sounds\", Nothing)
                 Catch ex As Exception
-                    MsgBox("还原时出现错误，无法还原！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "还原时出现错误，无法还原！", 2, 1, False, "确认", "", Me)
                 End Try
 
                 linshi.Close()
             Else
-                MsgBox("无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "无可用的还原资源，需要从Ballance工具箱部署器部署有关资源才能执行还原", 2, 1, False, "确认", "", Me)
             End If
         End If
 
@@ -3433,28 +3373,34 @@ sm_error:
 
         aaa.pro_title = "主题 1"
         aaa.pro_text = "第 1、5、10 关BGM"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "主题 2"
         aaa.pro_text = "第 3、8 关BGM"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "主题 3"
         aaa.pro_text = "第 4、9、11 关BGM"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "主题 4"
         aaa.pro_text = "第 7、12 关BGM"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "主题 5"
         aaa.pro_text = "第 2、6、13 关BGM"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
 
         '显示对话框
 
         Dim linshi = New Window_select_item
         ui_connect_window_select_item_list_select_index = -1
+        ui_connect_window_select_item_list_title = "选择要预览的BGM序号"
         linshi.Owner = Me
         linshi.ShowDialog()
 
@@ -3537,7 +3483,7 @@ sm_error:
                 ui_form_setting_form_1_fullscreen_btn.Content = "修改为 全屏"
             End If
 
-            MsgBox("成功修改", 64, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "成功修改", 0, 1, False, "确认", "", Me)
 
         Catch ex As Exception
 
@@ -3567,7 +3513,7 @@ sm_error:
 
             End If
 
-            MsgBox("在操作注册表中出现了错误，已经将窗口模式调整为 全屏 ！", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "在操作注册表中出现了错误，已经将窗口模式调整为 全屏 ！", 2, 1, False, "确认", "", Me)
 
         End Try
 
@@ -3582,28 +3528,34 @@ sm_error:
 
         aaa.pro_title = "德语"
         aaa.pro_text = "Deutsch"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "英语"
         aaa.pro_text = "Endlish"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "西班牙语"
         aaa.pro_text = "El español"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "意大利语"
         aaa.pro_text = "In Italiano"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "法语"
         aaa.pro_text = "Français"
+        aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
 
         '显示对话框
 
         Dim linshi = New Window_select_item
         ui_connect_window_select_item_list_select_index = -1
+        ui_connect_window_select_item_list_title = "选择您的语言"
         linshi.Owner = Me
         linshi.ShowDialog()
 
@@ -3644,10 +3596,10 @@ sm_error:
                         ui_form_setting_form_1_language.Text = "当前语言状态：未知（Unknow）"
                 End Select
 
-                MsgBox("修改语言成功！", 64, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "修改语言成功！", 0, 1, False, "确认", "", Me)
 
             Catch ex As Exception
-                MsgBox("将语言选择写入注册表失败！", 16, "Ballance工具箱")
+                window_dialogs_show("Ballance工具箱", "将语言选择写入注册表失败！", 2, 1, False, "确认", "", Me)
             End Try
 
         End If
@@ -3663,13 +3615,14 @@ sm_error:
             w_height = CType(ui_form_setting_form_1_size_height.Text, Integer)
         Catch ex As Exception
             '错误，跳出
-            MsgBox("分辨率数值不合要求", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "分辨率数值不合要求", 2, 1, False, "确认", "", Me)
             Exit Sub
         End Try
 
         If w_width >= 0 And w_width <= 65535 And w_height >= 0 And w_height <= 65535 Then
 
-            If MsgBox("请确认你要修改的分辨率是支持的，否则游戏无法正常工作，建议在非必要时都使用游戏内置的分辨率修改器！确认修改？", 32 + 256 + 1, "Ballance工具箱") = 1 Then
+            window_dialogs_show("Ballance工具箱", "请确认你要修改的分辨率是支持的，否则游戏无法正常工作，建议在非必要时都使用游戏内置的分辨率修改器！确认修改？", 1, 2, False, "确认", "取消", Me)
+            If window_dialogs_select_btn = 0 Then
 
                 '修改注册表
                 Dim Key As RegistryKey = Registry.LocalMachine
@@ -3690,17 +3643,17 @@ sm_error:
                     Dim linshi_2 As String = Long.Parse(linshi_1, System.Globalization.NumberStyles.HexNumber)
                     select_key.SetValue("VideoMode", linshi_2, RegistryValueKind.DWord)
 
-                    MsgBox("修改分辨率成功！", 64, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "修改分辨率成功！", 0, 1, False, "确认", "", Me)
 
                 Catch ex As Exception
-                    MsgBox("将分辨率选择写入注册表失败！", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", "将分辨率选择写入注册表失败！", 2, 1, False, "确认", "", Me)
                 End Try
 
             End If
 
         Else
             '错误，跳出
-            MsgBox("分辨率数值不合要求", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "分辨率数值不合要求", 2, 1, False, "确认", "", Me)
         End If
 
     End Sub
@@ -3729,7 +3682,7 @@ sm_error:
         ui_form_setting_form_local_hero_list.Items.GroupDescriptions.Clear()
         ui_form_setting_form_local_hero_list.Items.GroupDescriptions.Add(New PropertyGroupDescription("pro_level"))
 
-        MsgBox("读取本地成绩列表完成", 64, "Ballance工具箱")
+        window_dialogs_show("Ballance工具箱", "读取本地成绩列表完成", 0, 1, False, "确认", "", Me)
 
         '更新ui-listbox
         ui_update_list()
@@ -3737,11 +3690,13 @@ sm_error:
     End Sub
     '关卡全开
     Private Sub ui_form_setting_form_local_hero_open_all(sender As Object, e As RoutedEventArgs)
-        If MsgBox("确认关卡全开吗？这样导致你的成绩全部消失而且不可恢复！", 32 + 1, "Ballance工具箱") = 1 Then
+
+        window_dialogs_show("Ballance工具箱", "确认关卡全开吗？这样导致你的成绩全部消失而且不可恢复！", 1, 2, False, "确认", "取消", Me)
+        If window_dialogs_select_btn = 0 Then
             System.IO.File.Delete(ballance_start_path & "Database.tdb")
             System.IO.File.Copy(Environment.CurrentDirectory & "\system_nmo\open.tdb", ballance_start_path & "Database.tdb")
 
-            MsgBox("关卡全开成功！", 64, "Ballane")
+            window_dialogs_show("Ballance工具箱", "关卡全开成功！", 0, 1, False, "确认", "", Me)
         End If
 
     End Sub
@@ -3778,7 +3733,7 @@ sm_error:
             '更新ui-listbox
             ui_update_list()
         Else
-            MsgBox("没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
     End Sub
 
@@ -3793,8 +3748,10 @@ sm_error:
             '更新ui-listbox
             ui_update_list()
 
+            window_dialogs_show("Ballance工具箱", "应用成功", 0, 1, False, "确认", "", Me)
+
         Else
-            MsgBox("没有选中任何项", 16, "Ballance工具箱")
+            window_dialogs_show("Ballance工具箱", "没有选中任何项", 2, 1, False, "确认", "", Me)
         End If
 
     End Sub

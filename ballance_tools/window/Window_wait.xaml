@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ballance_tools"
         mc:Ignorable="d"
-        Title="请稍候" Height="200" Width="400" FontFamily="Microsoft YaHei UI Light" Icon="icon.ico">
+        Title="请稍候" Height="200" Width="400" FontFamily="Microsoft YaHei UI Light" Icon="/ballance_tools;component/icon.ico">
     <Grid Background="#FF2D2D2D">
         <Grid.RowDefinitions >
             <RowDefinition Height="*"/>

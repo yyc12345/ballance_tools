@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ballance_tools"
         mc:Ignorable="d"
-        Title="Ballance新手导引" Height="600" Width="800" FontFamily="Microsoft YaHei UI Light" Icon="icon.ico">
+        Title="Ballance新手导引" Height="600" Width="800" FontFamily="Microsoft YaHei UI Light" Icon="/ballance_tools;component/icon.ico">
     <Grid Background="#FF2D2D2D">
         <ScrollViewer Margin="50,30,50,30">
             <StackPanel Grid.Row="2">

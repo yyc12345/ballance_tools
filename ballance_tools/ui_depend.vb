@@ -349,4 +349,9 @@ Public Class ui_depend_window_select_item_list
     ''' </summary>
     ''' <returns></returns>
     Public Property pro_text As String
+    ''' <summary>
+    ''' 填充画刷，选中的话就填为 #ff1e90ff 未选中填 #00000000
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property pro_fill As SolidColorBrush
 End Class
