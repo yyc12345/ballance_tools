@@ -44,6 +44,10 @@ Class MainWindow
     ''' bml要验证的md5,允许安装的文件的md5
     ''' </summary>
     Public bml_md5 As String = ""
+    ''' <summary>
+    ''' 关卡要验证的md5,允许安装的文件的md5
+    ''' </summary>
+    Public level_md5 As String = ""
 
     ''' <summary>
     ''' Ballance路径，带\
@@ -59,13 +63,13 @@ Class MainWindow
     Private Sub select_packups(sender As Object, e As RoutedEventArgs)
 
 
-        For a = 1 To 6
+        For a = 1 To 7
             Dim tabitem_linshi As TabItem = CType(tab_contorl.Items.Item(a), TabItem)
 
             If tabitem_linshi.IsSelected = True Then
 
                 '区分分析，输入
-                If a = 6 Then
+                If a = 7 Then
                     open_exe_file.ShowDialog()
                     If System.IO.File.Exists(open_exe_file.FileName) = True Then
                         ui_bml_text.Text = open_exe_file.FileName
@@ -85,6 +89,8 @@ Class MainWindow
                                 ui_wave_text.Text = open_packups_file.FileName
                             Case 5
                                 ui_bgm_text.Text = open_packups_file.FileName
+                            Case 6
+                                ui_level_text.Text = open_packups_file.FileName
                         End Select
                     End If
 
@@ -110,7 +116,7 @@ Class MainWindow
         linshi.Owner = Me
         linshi.Show()
 
-        For a = 1 To 6
+        For a = 1 To 7
             Dim tabitem_linshi As TabItem = CType(tab_contorl.Items.Item(a), TabItem)
 
             If tabitem_linshi.IsSelected = True Then
@@ -236,7 +242,48 @@ Class MainWindow
                         Else
                             MsgBox("要部署的包文件不存在！", 16, "Ballance工具箱部署器")
                         End If
+
                     Case 6
+
+                        If System.IO.File.Exists(ui_level_text.Text) = True Then
+                            Dim word_arr() As String = level_md5.Split(",")
+                            Dim file_md5 As String = get_file_md5(ui_level_text.Text)
+                            Dim yes As Boolean = False
+                            For b = 0 To word_arr.Count - 1
+                                If word_arr(b) = file_md5 Then
+                                    yes = True
+                                    Exit For
+                                End If
+                            Next
+
+                            If yes = True Then
+
+                                Try
+                                    '解压缩
+                                    Dim bbb As New ICSharpCode.SharpZipLib.Zip.FastZip
+                                    '确认文件夹
+                                    If System.IO.Directory.Exists(Environment.CurrentDirectory & "\system_nmo\level") = False Then
+                                        System.IO.Directory.CreateDirectory(Environment.CurrentDirectory & "\system_nmo\level")
+                                    End If
+
+                                    bbb.ExtractZip(ui_level_text.Text,
+                                           Environment.CurrentDirectory & "\system_nmo\level\", Nothing)
+                                    MsgBox("部署成功", 64, "Ballance工具箱部署器")
+
+                                Catch ex As Exception
+                                    MsgBox("该文件部署时发生错误，部署失败！" & vbCrLf &
+                                   "原因：" & ex.Message & vbCrLf &
+                                   "详细消息：" & vbCrLf & ex.StackTrace, 16, "Ballance工具箱部署器")
+                                End Try
+
+                            Else
+                                MsgBox("该文件不是有效的，所以无法部署！请确认其来源是否正确！", 16, "Ballance工具箱部署器")
+                            End If
+                        Else
+                            MsgBox("要部署的包文件不存在！", 16, "Ballance工具箱部署器")
+                        End If
+
+                    Case 7
                         If System.IO.File.Exists(ui_bml_text.Text) = True Then
                             Dim word_arr() As String = bml_md5.Split(",")
                             Dim file_md5 As String = get_file_md5(ui_bml_text.Text)

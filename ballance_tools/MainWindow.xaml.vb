@@ -1660,6 +1660,11 @@ sm_error:
             System.IO.Directory.CreateDirectory(Environment.CurrentDirectory & "\cache\user")
         End If
 
+
+        If System.IO.Directory.Exists(Environment.CurrentDirectory & "\system_nmo\level") = False Then
+            System.IO.Directory.CreateDirectory(Environment.CurrentDirectory & "\system_nmo\level")
+        End If
+
     End Sub
 
 #End Region
@@ -1814,45 +1819,70 @@ sm_error:
 
     '还原
     Private Sub ui_form_level_form_check_restart_btn(sender As Object, e As RoutedEventArgs)
-        'TODO:开发完这个功能
-        'If ui_connect_form_level_form_check_list.Count <> 0 Then
-        '    Dim select_level(13) As Boolean
-        '    For a = 1 To 13
-        '        select_level(a) = False
-        '    Next
 
-        '    For b = 0 To ui_form_level_form_check_list.SelectedItems.Count - 1
-        '        For c = 0 To ui_connect_form_level_form_check_list.Count
-        '            '相同了
-        '            If ui_connect_form_level_form_check_list.Item(c).Equals(ui_form_level_form_check_list.SelectedItems.Item(b)) = True Then
-        '                select_level(c + 1) = True
-        '                Exit For
-        '            End If
-        '        Next
-        '    Next
+        If ui_connect_form_level_form_check_list.Count <> 0 Then
+            Dim select_level(15) As Boolean
+            For a = 1 To 15
+                select_level(a) = False
+            Next
+
+            For b = 0 To ui_form_level_form_check_list.SelectedItems.Count - 1
+                For c = 0 To ui_connect_form_level_form_check_list.Count - 1
+                    '相同了
+                    If ui_connect_form_level_form_check_list.Item(c).Equals(ui_form_level_form_check_list.SelectedItems.Item(b)) = True Then
+                        select_level(c + 1) = True
+                        Exit For
+                    End If
+                Next
+            Next
 
 
-        '    If ui_form_level_form_check_list.SelectedIndex <> -1 Then
-        '        Dim ok_word As String = "确认重置以下关卡吗？"
-        '        For d = 1 To 13
-        '            If select_level(d) = True Then
-        '                ok_word = ok_word & vbCrLf & "Level " & d & "（第" & d & "关）"
-        '            End If
-        '        Next
+            If ui_form_level_form_check_list.SelectedIndex <> -1 Then
+                Dim ok_word As String = "确认重置以下关卡吗？"
+                For d = 1 To 15
+                    If select_level(d) = True Then
+                        ok_word = ok_word & vbCrLf & "Level " & d & "（第" & d & "关）"
+                    End If
+                Next
 
-        '        If MsgBox(ok_word, MsgBoxStyle.OkCancel + 32, "Ballance工具箱") = MsgBoxResult.Ok Then
-        '            '开始替换
+                window_dialogs_show("Ballance工具箱", ok_word, 1, 2, False, "确认", "取消", Me)
+                If window_dialogs_select_btn = 0 Then
+                    '开始替换
+                    Dim result As String = "以下是替换的信息："
+                    For d = 1 To 15
+                        If select_level(d) = True Then
+                            If System.IO.File.Exists(Environment.CurrentDirectory & "\system_nmo\level\" & d & ".nmo") = True Then
 
-        '        End If
-        '    Else
-        '        MsgBox("您没有选中任何关卡", 16, "Ballance工具箱")
-        '    End If
+                                If d >= 10 Then
+                                    System.IO.File.Delete(ballance_start_path & "3d entities\level\level_" & d & ".nmo")
+                                    System.IO.File.Copy(Environment.CurrentDirectory & "\system_nmo\level\" & d & ".nmo",
+                                       ballance_start_path & "3d entities\level\level_" & d & ".nmo")
+                                Else
+                                    System.IO.File.Delete(ballance_start_path & "3d entities\level\level_0" & d & ".nmo")
+                                    System.IO.File.Copy(Environment.CurrentDirectory & "\system_nmo\level\" & d & ".nmo",
+                                        ballance_start_path & "3d entities\level\level_0" & d & ".nmo")
+                                End If
 
-        'Else
+                                result = result & vbCrLf & "Level " & d & " 替换成功"
+                            Else
+                                result = result & vbCrLf & "Level " & d & "替换错误，没有对应资源"
+                            End If
+                        End If
+                    Next
 
-        '    MsgBox("请先检测一次所有关卡才能进行重置", 16, "Ballance工具箱")
+                    window_dialogs_show("Ballance工具箱", result, 0, 1, False, "确认", "", Me)
 
-        'End If
+                End If
+            Else
+                window_dialogs_show("Ballance工具箱", "您没有选中任何关卡", 2, 1, False, "确认", "", Me)
+            End If
+
+        Else
+
+            window_dialogs_show("Ballance工具箱", "请先检测一次所有关卡才能进行重置", 2, 1, False, "确认", "", Me)
+
+        End If
+
     End Sub
 
 

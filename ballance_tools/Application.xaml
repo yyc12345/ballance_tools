@@ -113,11 +113,11 @@
         <ControlTemplate x:Key="ButtonControlTemplate" TargetType="{x:Type Button}">
             <Grid>
                 <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"/>
-                
+
                 <Grid x:Name="face" Background="#ff000000" Opacity="0"/>
-                
+
                 <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                   
+
                 <!--<Border.Effect>
         <DropShadowEffect BlurRadius="10" Color="#FFffffff" ShadowDepth="0" />
     </Border.Effect>-->
@@ -193,66 +193,62 @@
                 </Grid>
 
                 <TextBlock Grid.Column="3" Grid.Row="1" Foreground="white" FontSize="20" Text="{Binding pro_title}"/>
+
                 <Expander Header="详细信息" Grid.Column="3" Grid.Row="3" Foreground="White" FontSize="15">
                     <Grid Background="#00000000">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="2" Grid.Row="1" Foreground="white" FontSize="15" Text="{Binding pro_creator}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_creator}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="3" Foreground="white" FontSize="15" Width="200" Text="{Binding pro_description}">
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_description}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="5" Foreground="white" FontSize="15" Text="{Binding pro_difficulty}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_difficulty}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="7" Foreground="white" FontSize="15" Text="{Binding pro_playcount}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_playcount}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="9" Foreground="white" FontSize="15" Text="{Binding pro_stars}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_stars}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="11" Foreground="white" FontSize="15" Text="{Binding pro_downloadcount}" >
-                            <TextBlock.ToolTip>
-                                <Grid Background="White" Width="200">
-                                    <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_downloadcount}" TextWrapping="Wrap"/>
-                                </Grid>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
+                        <StackPanel Orientation="Vertical" Grid.Row="1">
+
+                            <TextBlock Foreground="white" FontSize="15" Text="{Binding pro_creator}">
+                                <TextBlock.ToolTip>
+                                    <Grid Background="White" Width="200">
+                                        <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_creator}" TextWrapping="Wrap"/>
+                                    </Grid>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBlock Foreground="white" FontSize="15" Width="200" Text="{Binding pro_description}" TextWrapping="Wrap" HorizontalAlignment="Left">
+                                <TextBlock.ToolTip>
+                                    <Grid Background="White" Width="200">
+                                        <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_description}" TextWrapping="Wrap"/>
+                                    </Grid>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBlock Foreground="white" FontSize="15" Text="{Binding pro_difficulty}" >
+                                <TextBlock.ToolTip>
+                                    <Grid Background="White" Width="200">
+                                        <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_difficulty}" TextWrapping="Wrap"/>
+                                    </Grid>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBlock Foreground="white" FontSize="15" Text="{Binding pro_playcount}" >
+                                <TextBlock.ToolTip>
+                                    <Grid Background="White" Width="200">
+                                        <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_playcount}" TextWrapping="Wrap"/>
+                                    </Grid>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBlock Foreground="white" FontSize="15" Text="{Binding pro_stars}" >
+                                <TextBlock.ToolTip>
+                                    <Grid Background="White" Width="200">
+                                        <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_stars}" TextWrapping="Wrap"/>
+                                    </Grid>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBlock Foreground="white" FontSize="15" Text="{Binding pro_downloadcount}" >
+                                <TextBlock.ToolTip>
+                                    <Grid Background="White" Width="200">
+                                        <TextBlock Foreground="Black" FontSize="15" Text="{Binding pro_downloadcount}" TextWrapping="Wrap"/>
+                                    </Grid>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+
+                        </StackPanel>
+
                     </Grid>
                 </Expander>
 

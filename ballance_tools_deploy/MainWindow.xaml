@@ -201,6 +201,39 @@
 
                     </TabItem>
 
+                    <!-- level-->
+                    <TabItem Header="原版关卡包" Style="{DynamicResource ui_temp_normal_tabitem}">
+
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="原版关卡包是工具箱中地图界面的还原原版关卡所需的文件，没有此文件，无法还原原版关卡&#x000A;
+该部署可有可无，如果你需要经常重置地图的话，可以部署" Foreground="White" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="6"/>
+
+                            <TextBlock Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="0" Text="原版关卡包打包文件：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ui_level_text" IsReadOnly="True" Foreground="White" FontSize="15" Grid.Row="3" Grid.Column="1" Text="" Background="#00000000" BorderThickness="0,0,0,1" VerticalContentAlignment="Center"/>
+
+                            <Button Content="选择源文件" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="3" Background="#ff1e90ff" BorderThickness="1" Click="select_packups"/>
+                            <Button Content="立即部署" FontSize="15" Foreground="white" Grid.Row="3" Grid.Column="5" Background="#ff1e90ff" BorderThickness="1" Click="file_free"/>
+
+                        </Grid>
+
+                    </TabItem>
+            
                     <!-- bml-->
                     <TabItem Header="BML安装源" Style="{DynamicResource ui_temp_normal_tabitem}">
 
@@ -233,6 +266,7 @@
                         </Grid>
 
                     </TabItem>
+
 
                 </TabControl>
                 
