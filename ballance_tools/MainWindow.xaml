@@ -263,7 +263,7 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
 
-                                        <TextBlock Foreground="White" FontSize="15" Text="没有英雄榜记录" Grid.Row="1" TextAlignment="Center"/>
+                                        <TextBlock x:Name="ui_form_level_form_hero_list_empty_text" Foreground="White" FontSize="15" Text="没有英雄榜记录" Grid.Row="1" TextAlignment="Center"/>
                                     </Grid>
                                     <ListBox x:Name="ui_form_level_form_hero_list" Grid.Row="4" Background="#00000000" BorderThickness="0" HorizontalContentAlignment="Stretch"/>
 

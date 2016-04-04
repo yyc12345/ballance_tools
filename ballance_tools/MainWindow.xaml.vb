@@ -264,7 +264,7 @@ Class MainWindow
                 Case "1"
                     ui_form_setting_form_1_language.Text = "当前语言状态：德语（Deutsch）"
                 Case "2"
-                    ui_form_setting_form_1_language.Text = "当前语言状态：英语（Endlish）"
+                    ui_form_setting_form_1_language.Text = "当前语言状态：英语（English）"
                 Case "3"
                     ui_form_setting_form_1_language.Text = "当前语言状态：西班牙语（El español）"
                 Case "4"
@@ -1910,36 +1910,39 @@ sm_error:
                         End If
 
                         If user_name = "" Or user_password = "" Then
+                            '恢复ui
+                            ui_form_level_form_hero_list_empty_text.Text = "没有英雄榜记录"
                         Else
                             ui_connect_form_level_form_hero_list.Clear()
 
                             Dim OnLineScore = New List(Of ScoreManager.Data.Score)
 
-                            'post提交
-                            Dim request As System.Net.HttpWebRequest = CType(System.Net.WebRequest.Create("http://jxtoolbox.sinaapp.com/api/select.php"), System.Net.HttpWebRequest)
-                            request.Method = "POST"
-                            request.ContentType = "application/x-www-form-urlencoded"
-                            'request.ContentLength = System.Text.Encoding.UTF8.GetByteCount(String.Format("ID={0}&Passwd={1}&Index={2}&Type=0", user_name, user_password,
-                            'ui_connect_form_level_form_level_list.Item(ui_form_level_form_level_list.SelectedIndex).pro_id))
-                            'request.CookieContainer = cookie
-                            Dim myRequestStream As System.IO.Stream = request.GetRequestStream()
-                            Dim myStreamWriter As System.IO.StreamWriter = New System.IO.StreamWriter(myRequestStream, System.Text.Encoding.GetEncoding("gb2312"))
-                            myStreamWriter.Write(String.Format("ID={0}&Passwd={1}&Index={2}&Type=0", user_name, user_password,
-                                                                                           ui_connect_form_level_form_level_list.Item(ui_form_level_form_level_list.SelectedIndex).pro_id))
-                            myStreamWriter.Close()
-
-
-
-                            Dim response As System.Net.HttpWebResponse = CType(request.GetResponse(), System.Net.HttpWebResponse)
-                            'response.Cookies = cookie.GetCookies(response.ResponseUri);
-                            Dim myResponseStream As System.IO.Stream = response.GetResponseStream()
-                            Dim myStreamReader As System.IO.StreamReader = New System.IO.StreamReader(myResponseStream, System.Text.Encoding.GetEncoding("utf-8"))
-                            Dim retString As String = myStreamReader.ReadToEnd()
-                            myStreamReader.Close()
-                            myResponseStream.Close()
 
                             '开始读取
                             Try
+                                'post提交
+                                Dim request As System.Net.HttpWebRequest = CType(System.Net.WebRequest.Create("http://jxtoolbox.sinaapp.com/api/select.php"), System.Net.HttpWebRequest)
+                                request.Method = "POST"
+                                request.ContentType = "application/x-www-form-urlencoded"
+                                'request.ContentLength = System.Text.Encoding.UTF8.GetByteCount(String.Format("ID={0}&Passwd={1}&Index={2}&Type=0", user_name, user_password,
+                                'ui_connect_form_level_form_level_list.Item(ui_form_level_form_level_list.SelectedIndex).pro_id))
+                                'request.CookieContainer = cookie
+                                Dim myRequestStream As System.IO.Stream = request.GetRequestStream()
+                                Dim myStreamWriter As System.IO.StreamWriter = New System.IO.StreamWriter(myRequestStream, System.Text.Encoding.GetEncoding("gb2312"))
+                                myStreamWriter.Write(String.Format("ID={0}&Passwd={1}&Index={2}&Type=0", user_name, user_password,
+                                                                                           ui_connect_form_level_form_level_list.Item(ui_form_level_form_level_list.SelectedIndex).pro_id))
+                                myStreamWriter.Close()
+
+
+
+                                Dim response As System.Net.HttpWebResponse = CType(request.GetResponse(), System.Net.HttpWebResponse)
+                                'response.Cookies = cookie.GetCookies(response.ResponseUri);
+                                Dim myResponseStream As System.IO.Stream = response.GetResponseStream()
+                                Dim myStreamReader As System.IO.StreamReader = New System.IO.StreamReader(myResponseStream, System.Text.Encoding.GetEncoding("utf-8"))
+                                Dim retString As String = myStreamReader.ReadToEnd()
+                                myStreamReader.Close()
+                                myResponseStream.Close()
+
                                 OnLineScore = ScoreManager.IO.Deserialize(Of ScoreManager.Data.Score).JsonDeserializeListData(retString)
 
                                 If OnLineScore.Count <> 0 Then
@@ -1980,8 +1983,13 @@ sm_error:
 
                                 End If
 
+                                '恢复ui
+                                ui_form_level_form_hero_list_empty_text.Text = "没有英雄榜记录"
+
                             Catch ex As Exception
-                                window_dialogs_show("Ballance工具箱", "您的用户名与密码可能有误，或者网络出现了一些小问题，请在稍后重新点击该关卡以重新获取英雄榜", 2, 1, False, "确认", "", Me)
+                                '输出到ui
+                                ui_form_level_form_hero_list_empty_text.Text = "获取出错，以下是相关信息：" & vbCrLf & ex.Message
+                                'window_dialogs_show("Ballance工具箱", "您的用户名与密码可能有误，或者网络出现了一些小问题，请在稍后重新点击该关卡以重新获取英雄榜，以下是相关信息：" & vbCrLf & ex.Message, 2, 1, False, "确认", "", Me)
                                 user_name = ""
                                 user_password = ""
                             End Try
@@ -1989,6 +1997,8 @@ sm_error:
                         End If
                     Else
                         '没有英雄榜的
+                        '恢复ui
+                        ui_form_level_form_hero_list_empty_text.Text = "没有英雄榜记录"
                         ui_connect_form_level_form_hero_list.Clear()
                     End If
 
@@ -3562,7 +3572,7 @@ sm_error:
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
         aaa.pro_title = "英语"
-        aaa.pro_text = "Endlish"
+        aaa.pro_text = "English"
         aaa.pro_fill = New SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
         ui_connect_window_select_item_list.Add(aaa)
         aaa = New ui_depend_window_select_item_list
