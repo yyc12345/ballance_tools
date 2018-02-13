@@ -1430,16 +1430,12 @@
 
                     <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
 
-                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="百度Ballance吧保留所有权利 (C) 2012-2016"/>
+                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="BearKidsTeam (C) 2018"/>
                         <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="Ballance工具箱"/>
                         <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text=""/>
                         
                         <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools.exe   语言：Vb.net   Ballance工具箱主程序   Version 4.0.0.0"/>
                         <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_deploy.exe   语言：Vb.net   Ballance工具箱部署器   Version 1.0.0.0"/>
-                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_monitor.exe   语言：Vb.net   Ballance记录检测器   Version 1.0.0.0"/>
-                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_web.exe   语言：Vb.net   Ballance联机对战   Version 1.0.0.0"/>
-                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_web_service.exe   语言：Vb.net   Ballance联机对战服务器端   Version 1.0.0.0"/>
-                        <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ballance_tools_hook.dll   语言：Vb.net   键盘钩子库   Version 1.0.0.0"/>
                         <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ScoreManager.dll   语言：C#   Ballance工具箱连接ScoreManager库   Version 1.0.0.0"/>
                         <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text="ICSharpCode.SharpZipLib.dll   语言：C#   压缩文件压缩/解压缩库   Version 0.86.0.518"/>
                         <TextBlock Foreground="White" FontSize="15" TextAlignment="Center" Text=""/>

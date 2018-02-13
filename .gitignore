@@ -12,6 +12,7 @@
 
 # Build results
 [Dd]ebug/
+[Rr]elease/
 [Dd]ebugPublic/
 x64/
 x86/
@@ -207,4 +208,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/ScoreManager/bin/Release
+
+ScoreManager/

@@ -62,10 +62,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>F:\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ScoreManager">
-      <HintPath>..\ScoreManager\bin\Release\ScoreManager.dll</HintPath>
+      <HintPath>..\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -93,7 +90,6 @@
     <Compile Include="systems.vb" />
     <Compile Include="ui_depend.vb" />
     <Compile Include="ui_use.vb" />
-    <Compile Include="web_socket.vb" />
     <Compile Include="window\window_communication.vb" />
     <Compile Include="window\Window_dialogs.xaml.vb">
       <DependentUpon>Window_dialogs.xaml</DependentUpon>
@@ -225,6 +221,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="photo\time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScoreManager\ScoreManager.csproj">
+      <Project>{adcf8321-9cba-4de6-9525-a36de0b7df88}</Project>
+      <Name>ScoreManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
